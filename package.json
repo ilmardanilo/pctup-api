@@ -2,15 +2,15 @@
   "name": "pctup-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node dist/main/server.js",
     "build": "rimraf dist && tsc",
     "test": "jest --passWithNoTests --no-cache --runInBand",
     "test:watch": "npm test -- --watch",
     "test:staged": "npm test -- --findRelatedTests",
     "lint": "eslint .",
-    "lint:fix": "npm run lint -- --fix",
-    "prepare": "husky install"
+    "lint:fix": "npm run lint -- --fix"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,8 @@
   },
   "homepage": "https://github.com/ilmardanilo/pctup-api#readme",
   "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
     "@types/jest": "^29.4.0",
     "@types/typescript": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^5.53.0",
@@ -32,7 +34,6 @@
     "eslint-config-prettier": "^8.6.0",
     "eslint-import-resolver-typescript": "^3.5.3",
     "eslint-plugin-prettier": "^4.2.1",
-    "husky": "^8.0.3",
     "jest": "^29.4.3",
     "lint-staged": "^13.1.2",
     "prettier": "^2.8.4",
@@ -42,5 +43,10 @@
   },
   "engines": {
     "node": "16.x"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "helmet": "^6.0.1"
   }
 }
