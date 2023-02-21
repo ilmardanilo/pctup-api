@@ -1,3 +1,5 @@
-export const env = {
-  port: process.env.PORT || 3333,
-};
+import dotenv from 'dotenv';
+
+dotenv.config({ path: './environments/.env' });
+
+export const PORT = Number(process.env.PORT) || 1014;
