@@ -32,7 +32,8 @@
     "express-openapi-validator": "^5.0.2",
     "helmet": "^6.0.1",
     "js-yaml": "^4.1.0",
-    "swagger-ui-express": "^4.6.1"
+    "swagger-ui-express": "^4.6.1",
+    "traceability": "^3.1.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.13",

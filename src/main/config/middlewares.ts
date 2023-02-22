@@ -2,6 +2,7 @@ import { Express, json, urlencoded } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import {
+  handleError,
   swaggerDocumentation,
   swaggerValidation,
 } from '../../application/middlewares';
@@ -13,5 +14,6 @@ export const setupMiddlewares = (app: Express): void => {
   app.use(cors());
   app.use(swaggerValidation);
 
+  handleError(app);
   swaggerDocumentation(app);
 };
