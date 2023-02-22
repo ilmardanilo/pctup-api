@@ -1,0 +1,54 @@
+openapi: '3.0.2'
+info:
+  title: PCtup API
+  version: '1.0'
+paths:
+  /signup:
+    post:
+      tags:
+        - /login
+      description: >-
+        create account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+              required:
+                - 'name'
+
+        required: true
+      responses:
+        '201':
+          description: 'Successful request.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+        default:
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+servers:
+  - url: '/api/v1'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+  schemas:
+    Error:
+      properties:
+        message:
+          type: string
+      required:
+        - message
