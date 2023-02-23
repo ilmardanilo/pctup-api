@@ -1,7 +1,8 @@
-openapi: '3.0.2'
+openapi: '3.0.3'
 info:
   title: PCtup API
   version: '1.0'
+
 paths:
   /signup:
     post:
@@ -13,14 +14,9 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-              required:
-                - 'name'
-
+              $ref: '#/components/schemas/CreateAccount'
         required: true
+
       responses:
         '201':
           description: 'Successful request.'
@@ -30,6 +26,8 @@ paths:
                 type: object
                 properties:
                   name:
+                    type: string
+                  accessToken:
                     type: string
         default:
           description: Invalid request.
@@ -46,9 +44,34 @@ components:
       type: http
       scheme: basic
   schemas:
+    Date:
+      type: string
+      format: date-time
+
+    ObjectID:
+      type: string
+      pattern: '^[0-9a-fA-F]{24}$'
+
+    Email:
+      type: string
+      format: email
+
     Error:
       properties:
         message:
           type: string
       required:
         - message
+
+    CreateAccount:
+      properties:
+        name:
+          type: string
+        email:
+          $ref: '#/components/schemas/Email'
+        password:
+          type: string
+      required:
+        - 'name'
+        - 'email'
+        - 'password'
