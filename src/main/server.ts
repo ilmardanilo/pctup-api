@@ -1,6 +1,17 @@
+import { PORT, DATABASE_URI, DATABASE_NAME } from './config/env';
 import { app } from './config/app';
-import { PORT } from './config/env';
+import mongoose from 'mongoose';
 
-app.listen(PORT, () =>
-  console.log(`Server running at http://localhost:${PORT}`),
-);
+mongoose
+  .set('strictQuery', false)
+  .connect(DATABASE_URI, {
+    dbName: DATABASE_NAME,
+  })
+  .then(() => {
+    app.listen(PORT, () =>
+      console.log(`Server running at http://localhost:${PORT}`),
+    );
+  })
+  .catch((error) => {
+    console.log(error);
+  });
