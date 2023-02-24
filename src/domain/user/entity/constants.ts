@@ -1,4 +1,4 @@
 export enum CARGO {
-  USER = 'USER',
-  ADMIN = 'ADMIN',
+  USER = 'user',
+  ADMIN = 'admin',
 }
