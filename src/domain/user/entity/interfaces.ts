@@ -14,3 +14,9 @@ export interface IUser {
   createdAt: Date;
   updatedAt?: Date;
 }
+
+export interface IParamsCreateAccount {
+  name: string;
+  email: string;
+  password: string;
+}
