@@ -8,14 +8,14 @@ import { hash } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 
 export class UserAccountService implements IUserAccountService {
-  constructor(private readonly UserAccountRepository: IUserAccountRepository) {}
+  constructor(private readonly userAccountRepository: IUserAccountRepository) {}
 
   async createAccount({
     name,
     email,
     password,
   }: IParamsCreateAccount): Promise<{ name: string; accessToken: string }> {
-    const account = await this.UserAccountRepository.getAccountByEmail(email);
+    const account = await this.userAccountRepository.getAccountByEmail(email);
 
     if (account) {
       throw new BusinessError('Já existe um usuário com esse email.');
@@ -24,7 +24,7 @@ export class UserAccountService implements IUserAccountService {
     const salt = 12;
     const hashedPassword = await hash(password, salt);
 
-    const { id } = await this.UserAccountRepository.createAccount({
+    const { id } = await this.userAccountRepository.createAccount({
       name,
       email,
       password: hashedPassword,
