@@ -7,10 +7,10 @@ import { Request, Response } from 'express';
 export class UserAccountController {
   constructor(private readonly userAccountService: IUserAccountService) {}
 
-  async createAccount(
+  createAccount = async (
     req: Request<{}, {}, IParamsCreateAccount, {}>,
     res: Response,
-  ) {
+  ) => {
     try {
       const { name, email, password } = req.body;
 
@@ -24,5 +24,5 @@ export class UserAccountController {
     } catch (error) {
       handleError(res, error);
     }
-  }
+  };
 }
