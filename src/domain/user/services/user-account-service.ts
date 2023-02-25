@@ -1,10 +1,14 @@
 import { IUserAccountService } from '../entity/interfaces/user-account-service-interface';
 import { IParamsCreateAccount } from '../entity/interfaces/user-interface';
 import { IUserAccountRepository } from '../repository/user-account-repository-interface';
-import { BusinessError } from '../../../helpers/errors';
+import {
+  BusinessError,
+  ForbiddenError,
+  NotFoundError,
+} from '../../../helpers/errors';
 import { PRIVATE_KEY } from '../../../main/config/env-constants';
 
-import { hash } from 'bcrypt';
+import { hash, compare } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 
 export class UserAccountService implements IUserAccountService {
@@ -34,6 +38,30 @@ export class UserAccountService implements IUserAccountService {
 
     return {
       name,
+      accessToken,
+    };
+  }
+
+  async authenticate(
+    email: string,
+    password: string,
+  ): Promise<{ name: string; accessToken: string }> {
+    const account = await this.userAccountRepository.getAccountByEmail(email);
+
+    if (!account) {
+      throw new NotFoundError('Não existe usuário com esse email.');
+    }
+
+    const isEqual = await compare(password, account.senha);
+
+    if (!isEqual) {
+      throw new ForbiddenError('Senha incorreta!');
+    }
+
+    const accessToken = this._generateToken(String(account._id));
+
+    return {
+      name: account.nome,
       accessToken,
     };
   }

@@ -25,4 +25,22 @@ export class UserAccountController {
       handleError(res, error);
     }
   };
+
+  authenticate = async (
+    req: Request<{}, {}, { email: string; password: string }, {}>,
+    res: Response,
+  ) => {
+    try {
+      const { email, password } = req.body;
+
+      const result = await this.userAccountService.authenticate(
+        email,
+        password,
+      );
+
+      res.status(200).json(result);
+    } catch (error) {
+      handleError(res, error);
+    }
+  };
 }
