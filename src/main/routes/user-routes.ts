@@ -1,7 +1,9 @@
 import { Router } from 'express';
+import { UserAccountControllerFactory } from '../factories/user/user-account-controller-factory';
 
-export const userRouter = Router();
+const userAccountController = UserAccountControllerFactory.create();
+const userRouter = Router();
 
-userRouter.post('/signup', (req, res) => {
-  res.json({ message: '...' });
-});
+userRouter.post('/signup', userAccountController.createAccount);
+
+export { userRouter };
