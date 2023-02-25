@@ -9,7 +9,7 @@ paths:
       tags:
         - /login
       description: >-
-        create account
+        Create account.
       requestBody:
         content:
           application/json:
@@ -19,6 +19,38 @@ paths:
 
       responses:
         '201':
+          description: 'Successful request.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  accessToken:
+                    type: string
+        default:
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /login:
+    post:
+      tags:
+        - /login
+      description: >-
+        Authenticate session.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginParams'
+        required: true
+
+      responses:
+        '200':
           description: 'Successful request.'
           content:
             application/json:
@@ -73,5 +105,15 @@ components:
           type: string
       required:
         - 'name'
+        - 'email'
+        - 'password'
+
+    LoginParams:
+      properties:
+        email:
+          $ref: '#/components/schemas/Email'
+        password:
+          type: string
+      required:
         - 'email'
         - 'password'
