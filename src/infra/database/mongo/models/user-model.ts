@@ -1,4 +1,4 @@
-import { CARGO } from '../../../../domain/user/entity/constants';
+import { CARGO } from '../../../../domain/user/entity/user-constants';
 import mongoose from 'mongoose';
 
 const UsuarioSchema = new mongoose.Schema(

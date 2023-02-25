@@ -1,9 +1,9 @@
-import { MUser } from '../../database/mongo/models/user';
+import { MUser } from '../../database/mongo/models/user-model';
 import {
   IParamsCreateAccount,
   IUser,
-} from '../../../domain/user/entity/interfaces';
-import { IUserAccountRepository } from '../../../domain/user/repository/user-account';
+} from '../../../domain/user/entity/interfaces/user-interface';
+import { IUserAccountRepository } from '../../../domain/user/repository/user-account-repository-interface';
 
 export class UserAccountRepository implements IUserAccountRepository {
   private readonly userCollection = MUser;

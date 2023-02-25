@@ -1,4 +1,4 @@
-import { PORT, DATABASE_URI, DATABASE_NAME } from './config/env';
+import { PORT, DATABASE_URI, DATABASE_NAME } from './config/env-constants';
 import { app } from './config/app';
 import mongoose from 'mongoose';
 

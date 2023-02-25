@@ -1,5 +1,5 @@
-import { setupMiddlewares } from './middlewares';
-import { setupRoutes } from './routes';
+import { setupMiddlewares } from './setup-middlewares';
+import { setupRoutes } from './setup-routes';
 import express from 'express';
 
 export const app = express();

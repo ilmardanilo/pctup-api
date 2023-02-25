@@ -1,2 +1,2 @@
-export * from './swagger';
-export * from './handle-error';
+export * from './swagger-middleware';
+export * from './handle-error-middleware';

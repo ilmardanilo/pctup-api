@@ -1,4 +1,4 @@
-import { CARGO } from './constants';
+import { CARGO } from '../user-constants';
 import { ObjectId } from 'mongoose';
 
 export interface IUser {
@@ -19,4 +19,9 @@ export interface IParamsCreateAccount {
   name: string;
   email: string;
   password: string;
+}
+
+export interface IResponseCreateAccount {
+  name: string;
+  accessToken: string;
 }
