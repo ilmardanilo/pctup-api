@@ -103,6 +103,7 @@ components:
           $ref: '#/components/schemas/Email'
         password:
           type: string
+          minLength: 6
       required:
         - 'name'
         - 'email'
