@@ -68,6 +68,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+  /users/{userId}:
+    get:
+      tags:
+        - /users
+      description: >-
+        Search user by id.
+
+      parameters:
+        - name: userId
+          in: path
+          description: >-
+            The id of the user entity.
+          required: true
+          schema:
+            $ref: '#/components/schemas/ObjectID'
+
+      responses:
+        '200':
+          description: 'Successful request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        default:
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
 servers:
   - url: '/api/v1'
 components:
@@ -118,3 +148,26 @@ components:
       required:
         - 'email'
         - 'password'
+
+    UserResponse:
+      properties:
+        _id:
+          $ref: '#/components/schemas/ObjectID'
+        name:
+          type: string
+        email:
+          $ref: '#/components/schemas/Email'
+        dataNascimento:
+          type: string
+        profissao:
+          type: string
+        estado:
+          type: string
+        cidade:
+          type: string
+        cargo:
+          type: string
+        createdAt:
+          $ref: '#/components/schemas/Date'
+        updatedAt:
+          $ref: '#/components/schemas/Date'
