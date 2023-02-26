@@ -1,13 +1,19 @@
 # Login
 
+> ## Dados
+>
+> ### Body
+
+- email
+- password
+
 > ## Caso de sucesso
 
 1. ✅ Recebe uma requisição do tipo **POST** na rota **/api/v1/login**
-2. ✅ Recebe no corpo da requisição os parâmetros **email** e **password**
-3. ✅ **Busca** o usuário com o email fornecido
-4. ✅ **Verifica** se a senha fornecida é igual a senha do usuario resgatado pelo email
-5. ✅ Gera um **token** de acesso a partir do ID do usuário
-6. ✅ Retorna **200** com o token de acesso e o nome do usuário
+2. ✅ **Busca** o usuário com o email fornecido
+3. ✅ **Verifica** se a senha fornecida é igual a senha do usuario resgatado pelo email
+4. ✅ Gera um **token** de acesso a partir do ID do usuário
+5. ✅ Retorna **200** com o token de acesso e o nome do usuário
 
 > ## Exceções
 

@@ -1,14 +1,21 @@
 # Cadastro
 
+> ## Dados
+>
+> ### Body
+
+- name
+- email
+- password
+
 > ## Caso de sucesso
 
 1. ✅ Recebe uma requisição do tipo **POST** na rota **/api/v1/signup**
-2. ✅ Recebe no corpo da requisição os parâmetros **name**, **email** e **password**
-3. ✅ **Valida** se já existe um usuário com o email fornecido
-4. ✅ Gera uma senha **criptografada** (essa senha não pode ser descriptografada)
-5. ✅ **Cria** uma conta para o usuário com os dados informados, **substituindo** a senha pela senha criptografada
-6. ✅ Gera um **token** de acesso a partir do ID do usuário com 1 hora de expiração
-7. ✅ Retorna **201** com o token de acesso e o nome do usuário
+2. ✅ **Valida** se já existe um usuário com o email fornecido
+3. ✅ Gera uma senha **criptografada** (essa senha não pode ser descriptografada)
+4. ✅ **Cria** uma conta para o usuário com os dados informados, **substituindo** a senha pela senha criptografada
+5. ✅ Gera um **token** de acesso a partir do ID do usuário com 1 hora de expiração
+6. ✅ Retorna **201** com o token de acesso e o nome do usuário
 
 > ## Exceções
 
