@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import { UserAccountControllerFactory } from '../factories/user/user-account-controller-factory';
+import { auth } from '../../application/middlewares/auth-middleware';
+import { UserControllerFactory } from '../factories/user/user-controller-factory';
 
-const userAccountController = UserAccountControllerFactory.create();
+const userController = UserControllerFactory.create();
 const userRouter = Router();
 
-userRouter.post('/signup', userAccountController.createAccount);
-userRouter.post('/login', userAccountController.authenticate);
+userRouter.get('/users/:userId', auth, userController.getUserById);
 
 export { userRouter };
