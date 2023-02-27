@@ -25,3 +25,11 @@ export interface IResponseCreateAccount {
   name: string;
   accessToken: string;
 }
+
+export interface IParamsUpdateUser {
+  nome?: string;
+  dataNascimento?: Date;
+  profissao?: string;
+  estado?: string;
+  cidade?: string;
+}
