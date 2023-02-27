@@ -140,6 +140,10 @@ components:
   schemas:
     Date:
       type: string
+      format: date
+
+    DateTime:
+      type: string
       format: date-time
 
     ObjectID:
@@ -190,7 +194,7 @@ components:
         email:
           $ref: '#/components/schemas/Email'
         dataNascimento:
-          $ref: '#/components/schemas/Date'
+          $ref: '#/components/schemas/DateTime'
         profissao:
           type: string
         estado:
@@ -200,9 +204,9 @@ components:
         cargo:
           type: string
         createdAt:
-          $ref: '#/components/schemas/Date'
+          $ref: '#/components/schemas/DateTime'
         updatedAt:
-          $ref: '#/components/schemas/Date'
+          $ref: '#/components/schemas/DateTime'
 
     ParamsUpdateUser:
       properties:
