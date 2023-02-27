@@ -9,7 +9,7 @@ paths:
       tags:
         - /login
       description: >-
-        Create account.
+        Cria conta.
       requestBody:
         content:
           application/json:
@@ -41,7 +41,7 @@ paths:
       tags:
         - /login
       description: >-
-        Authenticate session.
+        Autentica a sessão.
       requestBody:
         content:
           application/json:
@@ -73,13 +73,13 @@ paths:
       tags:
         - /users
       description: >-
-        Search user by id.
+        Busca usuário por id.
 
       parameters:
         - name: userId
           in: path
           description: >-
-            The id of the user entity.
+            ObjectId do usuário.
           required: true
           schema:
             $ref: '#/components/schemas/ObjectID'
@@ -153,7 +153,7 @@ components:
       properties:
         _id:
           $ref: '#/components/schemas/ObjectID'
-        name:
+        nome:
           type: string
         email:
           $ref: '#/components/schemas/Email'
