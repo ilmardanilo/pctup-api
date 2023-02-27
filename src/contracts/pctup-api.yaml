@@ -97,6 +97,38 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+    put:
+      tags:
+        - /users
+      description: >-
+        Atualiza usuário por id.
+
+      parameters:
+        - name: userId
+          in: path
+          description: >-
+            ObjectId do usuário.
+          required: true
+          schema:
+            $ref: '#/components/schemas/ObjectID'
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParamsUpdateUser'
+        required: true
+
+      responses:
+        '204':
+          description: 'The resource was updated successfully.'
+
+        default:
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
 servers:
   - url: '/api/v1'
@@ -158,7 +190,7 @@ components:
         email:
           $ref: '#/components/schemas/Email'
         dataNascimento:
-          type: string
+          $ref: '#/components/schemas/Date'
         profissao:
           type: string
         estado:
@@ -171,3 +203,16 @@ components:
           $ref: '#/components/schemas/Date'
         updatedAt:
           $ref: '#/components/schemas/Date'
+
+    ParamsUpdateUser:
+      properties:
+        nome:
+          type: string
+        dataNascimento:
+          $ref: '#/components/schemas/Date'
+        profissao:
+          type: string
+        estado:
+          type: string
+        cidade:
+          type: string
