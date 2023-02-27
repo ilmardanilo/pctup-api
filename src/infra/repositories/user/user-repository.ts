@@ -1,5 +1,8 @@
 import { MUser } from '../../database/mongo/models/user-model';
-import { IUser } from '../../../domain/user/entity/interfaces/user-interface';
+import {
+  IUser,
+  IParamsUpdateUser,
+} from '../../../domain/user/entity/interfaces/user-interface';
 import { IUserRepository } from '../../../domain/user/repository/user-repository-interface';
 import { Types } from 'mongoose';
 
@@ -30,5 +33,22 @@ export class UserRepository implements IUserRepository {
       .lean();
 
     return user as unknown as IUser;
+  }
+
+  async updateUserById(
+    userId: string,
+    params: IParamsUpdateUser,
+  ): Promise<void> {
+    await this.userCollection.updateOne(
+      {
+        _id: new Types.ObjectId(userId),
+      },
+      {
+        $set: {
+          ...params,
+          updatedAt: new Date(),
+        },
+      },
+    );
   }
 }
