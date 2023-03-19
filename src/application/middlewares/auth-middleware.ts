@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { JwtPayload, verify } from 'jsonwebtoken';
-import { UnauthorizedError } from '../../helpers/errors';
+import { ForbiddenError, UnauthorizedError } from '../../helpers/errors';
 import { handleError } from '../../helpers/utils';
 import { PRIVATE_KEY } from '../../main/config/env-constants';
 
@@ -13,6 +13,8 @@ export const auth = (req: Request, res: Response, next: NextFunction) => {
     }
 
     const { id } = verifyToken(token);
+
+    verifyUserId(req, id);
 
     req.locals = { userId: id };
 
@@ -32,5 +34,13 @@ const verifyToken = (token: string): { id: string } => {
       throw new UnauthorizedError('Expired token!');
     }
     throw new UnauthorizedError('Invalid token! Please login again.');
+  }
+};
+
+const verifyUserId = (req: Request, idDecoded: string): void => {
+  const { userId } = req.params;
+
+  if (userId && userId !== idDecoded) {
+    throw new ForbiddenError();
   }
 };
