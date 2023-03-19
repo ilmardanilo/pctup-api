@@ -1,5 +1,8 @@
 import { IUserAccountService } from '../entity/interfaces/user-account-service-interface';
-import { IParamsCreateAccount } from '../entity/interfaces/user-interface';
+import {
+  IParamsCreateAccount,
+  IResponseCreateAccount,
+} from '../entity/interfaces/user-interface';
 import { IUserAccountRepository } from '../repository/user-account-repository-interface';
 import {
   BusinessError,
@@ -18,7 +21,7 @@ export class UserAccountService implements IUserAccountService {
     name,
     email,
     password,
-  }: IParamsCreateAccount): Promise<{ name: string; accessToken: string }> {
+  }: IParamsCreateAccount): Promise<IResponseCreateAccount> {
     const account = await this.userAccountRepository.getAccountByEmail(email);
 
     if (account) {
@@ -37,6 +40,7 @@ export class UserAccountService implements IUserAccountService {
     const accessToken = this._generateToken(id);
 
     return {
+      id,
       name,
       accessToken,
     };

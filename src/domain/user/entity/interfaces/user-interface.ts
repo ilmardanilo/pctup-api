@@ -22,6 +22,7 @@ export interface IParamsCreateAccount {
 }
 
 export interface IResponseCreateAccount {
+  id: string;
   name: string;
   accessToken: string;
 }
