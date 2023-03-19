@@ -21,7 +21,7 @@ export interface IParamsCreateAccount {
   password: string;
 }
 
-export interface IResponseCreateAccount {
+export interface IResponseCreateAndAuthenticateAccount {
   id: string;
   name: string;
   accessToken: string;
