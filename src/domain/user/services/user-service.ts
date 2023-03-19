@@ -34,4 +34,14 @@ export class UserService implements IUserService {
 
     await this.userRepository.updateUserById(userId, params);
   }
+
+  async deleteUserById(userId: string): Promise<void> {
+    const user = await this.userRepository.getUserById(userId);
+
+    if (!user) {
+      throw new NotFoundError('Usuário não encontrado.');
+    }
+
+    await this.userRepository.deleteUserById(userId);
+  }
 }
