@@ -13,7 +13,7 @@
 2. ✅ **Busca** o usuário com o email fornecido
 3. ✅ **Verifica** se a senha fornecida é igual a senha do usuario resgatado pelo email
 4. ✅ Gera um **token** de acesso a partir do ID do usuário
-5. ✅ Retorna **200** com o token de acesso e o nome do usuário
+5. ✅ Retorna **200** com o token de acesso, o nome e o id do usuário
 
 > ## Exceções
 

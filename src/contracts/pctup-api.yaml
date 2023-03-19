@@ -25,6 +25,8 @@ paths:
               schema:
                 type: object
                 properties:
+                  id:
+                    $ref: '#/components/schemas/ObjectID'
                   name:
                     type: string
                   accessToken:
@@ -57,6 +59,8 @@ paths:
               schema:
                 type: object
                 properties:
+                  id:
+                    $ref: '#/components/schemas/ObjectID'
                   name:
                     type: string
                   accessToken:
