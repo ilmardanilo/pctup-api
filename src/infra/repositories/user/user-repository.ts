@@ -51,4 +51,10 @@ export class UserRepository implements IUserRepository {
       },
     );
   }
+
+  async deleteUserById(userId: string): Promise<void> {
+    await this.userCollection.deleteOne({
+      _id: new Types.ObjectId(userId),
+    });
+  }
 }
