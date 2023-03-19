@@ -133,6 +133,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+        - /users
+      description: >-
+        Remove usuário por id.
+
+      parameters:
+        - name: userId
+          in: path
+          description: >-
+            ObjectId do usuário.
+          required: true
+          schema:
+            $ref: '#/components/schemas/ObjectID'
+
+      responses:
+        '204':
+          description: 'The resource was deleted successfully.'
+
+        default:
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
 servers:
   - url: '/api/v1'
