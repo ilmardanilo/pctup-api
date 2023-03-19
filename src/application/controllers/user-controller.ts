@@ -39,4 +39,19 @@ export class UserController {
       handleError(res, error);
     }
   };
+
+  deleteUserById = async (
+    req: Request<{ userId: string }, {}, {}, {}>,
+    res: Response,
+  ) => {
+    try {
+      const { userId } = req.params;
+
+      await this.userService.deleteUserById(userId);
+
+      res.status(204).json();
+    } catch (error) {
+      handleError(res, error);
+    }
+  };
 }

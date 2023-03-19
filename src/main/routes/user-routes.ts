@@ -7,5 +7,6 @@ const userRouter = Router();
 
 userRouter.get('/users/:userId', auth, userController.getUserById);
 userRouter.put('/users/:userId', auth, userController.updateUserById);
+userRouter.delete('/users/:userId', auth, userController.deleteUserById);
 
 export { userRouter };
