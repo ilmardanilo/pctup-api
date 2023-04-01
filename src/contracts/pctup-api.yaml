@@ -38,6 +38,34 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+  /setups:
+    post:
+      tags:
+        - /setups
+      description: >-
+        Cria setup.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSetup'
+        required: true
+
+      responses:
+        '201':
+          description: 'Successful request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetupResponse'
+
+        default:
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
   /login:
     post:
       tags:
@@ -249,3 +277,38 @@ components:
           type: string
         cidade:
           type: string
+
+    CreateSetup:
+      properties:
+        usuarioId:
+          $ref: '#/components/schemas/ObjectID'
+        titulo:
+          type: string
+        descricao:
+          type: string
+      required:
+        - 'usuarioId'
+        - 'descricao'
+
+    SetupResponse:
+      properties:
+        _id:
+          $ref: '#/components/schemas/ObjectID'
+        usuarioId:
+          $ref: '#/components/schemas/ObjectID'
+        titulo:
+          type: string
+        descricao:
+          type: string
+        estaAtivo:
+          type: boolean
+        estaPublico:
+          type: boolean
+        imagens:
+          type: array
+          items:
+            type: string
+        createdAt:
+          $ref: '#/components/schemas/DateTime'
+        updatedAt:
+          $ref: '#/components/schemas/DateTime'
