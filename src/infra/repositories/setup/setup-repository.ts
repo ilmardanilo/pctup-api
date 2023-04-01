@@ -9,10 +9,14 @@ export class SetupRepository implements ISetupRepository {
   private readonly setupCollection = MSetup;
 
   async createSetup(params: IParamsCreateSetup): Promise<ISetup> {
-    const newSetup = (await this.setupCollection.create(
-      params,
-    )) as unknown as ISetup;
+    const result = await this.setupCollection.create(params);
 
-    return newSetup;
+    const setup = result.toObject();
+
+    return {
+      ...setup,
+      _id: setup._id.toString(),
+      usuarioId: setup.usuarioId.toString(),
+    } as unknown as ISetup;
   }
 }
