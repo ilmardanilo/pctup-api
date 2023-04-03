@@ -24,4 +24,8 @@ export class SetupService implements ISetupService {
 
     return this.setupRepository.createSetup(params);
   }
+
+  async getSetups(): Promise<ISetup[]> {
+    return await this.setupRepository.getSetups();
+  }
 }

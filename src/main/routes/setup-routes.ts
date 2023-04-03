@@ -6,5 +6,6 @@ const setupController = SetupControllerFactory.create();
 const setupRouter = Router();
 
 setupRouter.post('/setups', auth, setupController.createSetup);
+setupRouter.get('/setups', setupController.getSetups);
 
 export { setupRouter };
