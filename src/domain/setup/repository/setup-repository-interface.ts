@@ -5,4 +5,5 @@ import {
 
 export interface ISetupRepository {
   createSetup(params: IParamsCreateSetup): Promise<ISetup>;
+  getSetups(): Promise<ISetup[]>;
 }

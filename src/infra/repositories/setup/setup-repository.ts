@@ -19,4 +19,19 @@ export class SetupRepository implements ISetupRepository {
       usuarioId: setup.usuarioId.toString(),
     } as unknown as ISetup;
   }
+
+  async getSetups(): Promise<ISetup[]> {
+    const setups = (await this.setupCollection
+      .find({
+        estaAtivo: true,
+        estaPublico: true,
+      })
+      .lean()) as unknown as ISetup[];
+
+    return setups.map((setup) => ({
+      ...setup,
+      _id: String(setup._id),
+      usuarioId: String(setup.usuarioId),
+    }));
+  }
 }
