@@ -41,7 +41,7 @@ paths:
   /setups:
     post:
       tags:
-        - /setups
+        - /setup
       description: >-
         Cria setup.
       requestBody:
@@ -58,6 +58,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SetupResponse'
+
+        default:
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      tags:
+        - /setup
+      description: >-
+        Lista os setups ativos e públicos.
+
+      responses:
+        '200':
+          description: 'Successful request.'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SetupResponse'
 
         default:
           description: Invalid request.
@@ -103,7 +125,7 @@ paths:
   /users/{userId}:
     get:
       tags:
-        - /users
+        - /user
       description: >-
         Busca usuário por id.
 
@@ -131,7 +153,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     put:
       tags:
-        - /users
+        - /user
       description: >-
         Atualiza usuário por id.
 
@@ -163,7 +185,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     delete:
       tags:
-        - /users
+        - /user
       description: >-
         Remove usuário por id.
 
