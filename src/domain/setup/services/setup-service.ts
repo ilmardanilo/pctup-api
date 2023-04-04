@@ -26,7 +26,10 @@ export class SetupService implements ISetupService {
   }
 
   async getSetups(): Promise<ISetup[]> {
-    return await this.setupRepository.getSetups();
+    return await this.setupRepository.getSetups({
+      estaAtivo: true,
+      estaPublico: true,
+    });
   }
 
   async deleteSetup(setupId: string): Promise<void> {

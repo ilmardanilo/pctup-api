@@ -17,3 +17,9 @@ export interface IParamsCreateSetup {
   titulo?: string;
   descricao: string;
 }
+
+export interface IParamsGetSetups {
+  usuarioId?: string;
+  estaAtivo?: boolean;
+  estaPublico?: boolean;
+}

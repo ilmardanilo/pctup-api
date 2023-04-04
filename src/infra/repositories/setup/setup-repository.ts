@@ -2,6 +2,7 @@ import { MSetup } from '../../database/mongo/models/setup-model';
 import {
   ISetup,
   IParamsCreateSetup,
+  IParamsGetSetups,
 } from '../../../domain/setup/entity/interfaces/setup-interface';
 import { ISetupRepository } from '../../../domain/setup/repository/setup-repository-interface';
 import { Types } from 'mongoose';
@@ -21,12 +22,9 @@ export class SetupRepository implements ISetupRepository {
     } as unknown as ISetup;
   }
 
-  async getSetups(): Promise<ISetup[]> {
+  async getSetups(params: IParamsGetSetups): Promise<ISetup[]> {
     const setups = (await this.setupCollection
-      .find({
-        estaAtivo: true,
-        estaPublico: true,
-      })
+      .find(params)
       .lean()) as unknown as ISetup[];
 
     return setups.map((setup) => ({
