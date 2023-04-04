@@ -32,6 +32,15 @@ export class SetupService implements ISetupService {
     });
   }
 
+  async getSetupsByUserId(userId: string): Promise<ISetup[]> {
+    const user = await this.userRepository.getUserById(userId);
+
+    if (!user) {
+      throw new NotFoundError('Usuário não encontrado.');
+    }
+    return await this.setupRepository.getSetups({ usuarioId: userId });
+  }
+
   async deleteSetup(setupId: string): Promise<void> {
     const setup = await this.setupRepository.getSetupById(setupId);
 
