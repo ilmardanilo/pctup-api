@@ -38,56 +38,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /setups:
-    post:
-      tags:
-        - /setup
-      description: >-
-        Cria setup.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateSetup'
-        required: true
-
-      responses:
-        '201':
-          description: 'Successful request.'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SetupResponse'
-
-        default:
-          description: Invalid request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-    get:
-      tags:
-        - /setup
-      description: >-
-        Lista os setups ativos e públicos.
-
-      responses:
-        '200':
-          description: 'Successful request.'
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SetupResponse'
-
-        default:
-          description: Invalid request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-
   /login:
     post:
       tags:
@@ -194,6 +144,83 @@ paths:
           in: path
           description: >-
             ObjectId do usuário.
+          required: true
+          schema:
+            $ref: '#/components/schemas/ObjectID'
+
+      responses:
+        '204':
+          description: 'The resource was deleted successfully.'
+
+        default:
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /setups:
+    post:
+      tags:
+        - /setup
+      description: >-
+        Cria setup.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSetup'
+        required: true
+
+      responses:
+        '201':
+          description: 'Successful request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetupResponse'
+
+        default:
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      tags:
+        - /setup
+      description: >-
+        Lista os setups ativos e públicos.
+
+      responses:
+        '200':
+          description: 'Successful request.'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SetupResponse'
+
+        default:
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /setups/{setupId}:
+    delete:
+      tags:
+        - /setup
+      description: >-
+        Remove um setup por id.
+
+      parameters:
+        - name: setupId
+          in: path
+          description: >-
+            ObjectId do setup.
           required: true
           schema:
             $ref: '#/components/schemas/ObjectID'
