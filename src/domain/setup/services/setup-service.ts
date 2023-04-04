@@ -28,4 +28,14 @@ export class SetupService implements ISetupService {
   async getSetups(): Promise<ISetup[]> {
     return await this.setupRepository.getSetups();
   }
+
+  async deleteSetup(setupId: string): Promise<void> {
+    const setup = await this.setupRepository.getSetupById(setupId);
+
+    if (!setup) {
+      throw new NotFoundError('Setup não encontrado.');
+    }
+
+    await this.setupRepository.deleteSetup(setupId);
+  }
 }
