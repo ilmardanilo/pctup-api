@@ -46,4 +46,19 @@ export class SetupController {
       handleError(res, error);
     }
   };
+
+  getSetupsByUserId = async (
+    req: Request<{ userId: string }, {}, {}, {}>,
+    res: Response,
+  ) => {
+    try {
+      const { userId } = req.params;
+
+      const result = await this.setupService.getSetupsByUserId(userId);
+
+      res.status(200).json(result);
+    } catch (error) {
+      handleError(res, error);
+    }
+  };
 }
