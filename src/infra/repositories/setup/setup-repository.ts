@@ -4,6 +4,7 @@ import {
   IParamsCreateSetup,
 } from '../../../domain/setup/entity/interfaces/setup-interface';
 import { ISetupRepository } from '../../../domain/setup/repository/setup-repository-interface';
+import { Types } from 'mongoose';
 
 export class SetupRepository implements ISetupRepository {
   private readonly setupCollection = MSetup;
@@ -33,5 +34,17 @@ export class SetupRepository implements ISetupRepository {
       _id: String(setup._id),
       usuarioId: String(setup.usuarioId),
     }));
+  }
+
+  async getSetupById(setupId: string): Promise<ISetup> {
+    const setup = (await this.setupCollection
+      .findOne({ _id: new Types.ObjectId(setupId) })
+      .lean()) as unknown as ISetup;
+
+    return {
+      ...setup,
+      _id: String(setup._id),
+      usuarioId: String(setup.usuarioId),
+    };
   }
 }
