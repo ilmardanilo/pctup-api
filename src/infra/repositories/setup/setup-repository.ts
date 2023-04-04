@@ -36,15 +36,21 @@ export class SetupRepository implements ISetupRepository {
     }));
   }
 
-  async getSetupById(setupId: string): Promise<ISetup> {
+  async getSetupById(setupId: string): Promise<ISetup | null> {
     const setup = (await this.setupCollection
       .findOne({ _id: new Types.ObjectId(setupId) })
       .lean()) as unknown as ISetup;
 
-    return {
-      ...setup,
-      _id: String(setup._id),
-      usuarioId: String(setup.usuarioId),
-    };
+    return (
+      setup && {
+        ...setup,
+        _id: String(setup._id),
+        usuarioId: String(setup.usuarioId),
+      }
+    );
+  }
+
+  async deleteSetup(setupId: string): Promise<void> {
+    await this.setupCollection.deleteOne({ _id: new Types.ObjectId(setupId) });
   }
 }
