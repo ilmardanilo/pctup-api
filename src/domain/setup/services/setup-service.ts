@@ -1,8 +1,9 @@
 import { ISetupService } from '../entity/interfaces/setup-service-interface';
 import { ISetupRepository } from '../repository/setup-repository-interface';
-import { NotFoundError } from '../../../helpers/errors';
+import { BusinessError, NotFoundError } from '../../../helpers/errors';
 import {
   IParamsCreateSetup,
+  IParamsUpdateSetup,
   ISetup,
 } from '../entity/interfaces/setup-interface';
 import { IUserRepository } from '../../user/repository/user-repository-interface';
@@ -49,5 +50,24 @@ export class SetupService implements ISetupService {
     }
 
     await this.setupRepository.deleteSetup(setupId);
+  }
+
+  async updateSetupById(
+    setupId: string,
+    params: IParamsUpdateSetup,
+  ): Promise<void> {
+    if (!Object.keys(params).length) {
+      throw new BusinessError(
+        'Informe pelo menos um parâmetro para ser atualizado.',
+      );
+    }
+
+    const setup = await this.setupRepository.getSetupById(setupId);
+
+    if (!setup) {
+      throw new NotFoundError('Setup não encontrado.');
+    }
+
+    await this.setupRepository.updateSetupById(setupId, params);
   }
 }
