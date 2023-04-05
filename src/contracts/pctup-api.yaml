@@ -301,6 +301,33 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+  /comments:
+    post:
+      tags:
+        - Comentário
+      description: >-
+        Cria comentário.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateComment'
+        required: true
+
+      responses:
+        '201':
+          description: 'Successful request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentResponse'
+
+        default:
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 servers:
   - url: '/api/v1'
 components:
@@ -435,3 +462,31 @@ components:
           type: string
         estaPublico:
           type: boolean
+
+    CreateComment:
+      properties:
+        usuarioId:
+          $ref: '#/components/schemas/ObjectID'
+        setupId:
+          $ref: '#/components/schemas/ObjectID'
+        descricao:
+          type: string
+      required:
+        - 'usuarioId'
+        - 'setupId'
+        - 'descricao'
+
+    CommentResponse:
+      properties:
+        _id:
+          $ref: '#/components/schemas/ObjectID'
+        usuarioId:
+          $ref: '#/components/schemas/ObjectID'
+        setupId:
+          $ref: '#/components/schemas/ObjectID'
+        descricao:
+          type: string
+        createdAt:
+          $ref: '#/components/schemas/DateTime'
+        updatedAt:
+          $ref: '#/components/schemas/DateTime'
