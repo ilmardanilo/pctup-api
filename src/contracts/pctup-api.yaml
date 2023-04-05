@@ -235,6 +235,38 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+    put:
+      tags:
+        - /setup
+      description: >-
+        Atualiza setup por id.
+
+      parameters:
+        - name: setupId
+          in: path
+          description: >-
+            ObjectId do setup.
+          required: true
+          schema:
+            $ref: '#/components/schemas/ObjectID'
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParamsUpdateSetup'
+        required: true
+
+      responses:
+        '204':
+          description: 'The resource was updated successfully.'
+
+        default:
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
   /setups/users/{userId}:
     get:
@@ -394,3 +426,12 @@ components:
           $ref: '#/components/schemas/DateTime'
         updatedAt:
           $ref: '#/components/schemas/DateTime'
+
+    ParamsUpdateSetup:
+      properties:
+        titulo:
+          type: string
+        descricao:
+          type: string
+        estaPublico:
+          type: boolean
