@@ -14,3 +14,7 @@ export interface IParamsCreateComment {
   setupId: string;
   descricao: string;
 }
+
+export interface IParamsUpdateComment {
+  descricao: string;
+}

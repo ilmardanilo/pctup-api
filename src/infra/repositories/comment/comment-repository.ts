@@ -3,6 +3,7 @@ import { ICommentRepository } from '../../../domain/comment/repository/comment-r
 import {
   IComment,
   IParamsCreateComment,
+  IParamsUpdateComment,
 } from '../../../domain/comment/entity/interfaces/comment-interface';
 import { Types } from 'mongoose';
 
@@ -34,6 +35,21 @@ export class CommentRepository implements ICommentRepository {
         usuarioId: String(comment.usuarioId),
         setupId: String(comment.setupId),
       }
+    );
+  }
+
+  async updateComment(
+    commentId: string,
+    params: IParamsUpdateComment,
+  ): Promise<void> {
+    await this.commentCollection.updateOne(
+      { _id: new Types.ObjectId(commentId) },
+      {
+        $set: {
+          ...params,
+          updatedAt: new Date(),
+        },
+      },
     );
   }
 }
