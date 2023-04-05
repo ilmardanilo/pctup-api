@@ -4,6 +4,7 @@ import { IUserRepository } from '../../user/repository/user-repository-interface
 import {
   IComment,
   IParamsCreateComment,
+  IParamsUpdateComment,
 } from '../entity/interfaces/comment-interface';
 import { ICommentService } from '../entity/interfaces/comment-service-interface';
 import { ICommentRepository } from '../repository/comment-repository-interface';
@@ -31,5 +32,18 @@ export class CommentService implements ICommentService {
     }
 
     return await this.commentRepository.createComment(params);
+  }
+
+  async updateComment(
+    commentId: string,
+    params: IParamsUpdateComment,
+  ): Promise<void> {
+    const comment = await this.commentRepository.getCommentById(commentId);
+
+    if (!comment) {
+      throw new NotFoundError('Comentário não encontrado.');
+    }
+
+    await this.commentRepository.updateComment(commentId, params);
   }
 }
