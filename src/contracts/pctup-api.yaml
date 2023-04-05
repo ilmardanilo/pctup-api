@@ -7,7 +7,7 @@ paths:
   /signup:
     post:
       tags:
-        - /login
+        - Login
       description: >-
         Cria conta.
       requestBody:
@@ -41,7 +41,7 @@ paths:
   /login:
     post:
       tags:
-        - /login
+        - Login
       description: >-
         Autentica a sessão.
       requestBody:
@@ -75,7 +75,7 @@ paths:
   /users/{userId}:
     get:
       tags:
-        - /user
+        - Usuário
       description: >-
         Busca usuário por id.
 
@@ -103,7 +103,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     put:
       tags:
-        - /user
+        - Usuário
       description: >-
         Atualiza usuário por id.
 
@@ -135,7 +135,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     delete:
       tags:
-        - /user
+        - Usuário
       description: >-
         Remove usuário por id.
 
@@ -162,7 +162,7 @@ paths:
   /setups:
     post:
       tags:
-        - /setup
+        - Setup
       description: >-
         Cria setup.
       requestBody:
@@ -188,7 +188,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     get:
       tags:
-        - /setup
+        - Setup
       description: >-
         Lista os setups ativos e públicos.
 
@@ -212,7 +212,7 @@ paths:
   /setups/{setupId}:
     delete:
       tags:
-        - /setup
+        - Setup
       description: >-
         Remove um setup por id.
 
@@ -237,7 +237,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     put:
       tags:
-        - /setup
+        - Setup
       description: >-
         Atualiza setup por id.
 
@@ -271,7 +271,7 @@ paths:
   /setups/users/{userId}:
     get:
       tags:
-        - /setup
+        - Setup
       description: >-
         Lista os setups de um usuário.
 
