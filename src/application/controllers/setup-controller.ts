@@ -1,6 +1,9 @@
 import { ISetupService } from '../../domain/setup/entity/interfaces/setup-service-interface';
 import { handleError } from '../../helpers/utils';
-import { IParamsCreateSetup } from '../../domain/setup/entity/interfaces/setup-interface';
+import {
+  IParamsCreateSetup,
+  IParamsUpdateSetup,
+} from '../../domain/setup/entity/interfaces/setup-interface';
 
 import { Request, Response } from 'express';
 
@@ -57,6 +60,23 @@ export class SetupController {
       const result = await this.setupService.getSetupsByUserId(userId);
 
       res.status(200).json(result);
+    } catch (error) {
+      handleError(res, error);
+    }
+  };
+
+  updateSetup = async (
+    req: Request<{ setupId: string }, {}, IParamsUpdateSetup, {}>,
+    res: Response,
+  ) => {
+    try {
+      const { setupId } = req.params;
+
+      const { ...params } = req.body;
+
+      await this.setupService.updateSetupById(setupId, params);
+
+      res.status(204).json();
     } catch (error) {
       handleError(res, error);
     }
