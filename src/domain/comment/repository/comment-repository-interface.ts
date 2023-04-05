@@ -5,4 +5,5 @@ import {
 
 export interface ICommentRepository {
   createComment(params: IParamsCreateComment): Promise<IComment>;
+  getCommentById(commentId: string): Promise<IComment>;
 }
