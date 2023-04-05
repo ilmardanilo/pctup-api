@@ -23,3 +23,9 @@ export interface IParamsGetSetups {
   estaAtivo?: boolean;
   estaPublico?: boolean;
 }
+
+export interface IParamsUpdateSetup {
+  titulo?: string;
+  descricao?: string;
+  estaPublico?: boolean;
+}
