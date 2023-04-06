@@ -56,4 +56,19 @@ export class CommentController {
       handleError(res, error);
     }
   };
+
+  getCommentsBySetupId = async (
+    req: Request<{ setupId: string }, {}, {}, {}>,
+    res: Response,
+  ) => {
+    try {
+      const { setupId } = req.params;
+
+      const result = await this.commentService.getCommentsBySetupId(setupId);
+
+      res.status(200).json(result);
+    } catch (error) {
+      handleError(res, error);
+    }
+  };
 }
