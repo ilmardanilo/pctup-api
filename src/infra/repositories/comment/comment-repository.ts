@@ -52,4 +52,10 @@ export class CommentRepository implements ICommentRepository {
       },
     );
   }
+
+  async deleteComment(commentId: string): Promise<void> {
+    await this.commentCollection.deleteOne({
+      _id: new Types.ObjectId(commentId),
+    });
+  }
 }
