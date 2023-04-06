@@ -335,6 +335,16 @@ paths:
         - Comentário
       description: >-
         Atualiza um comentário.
+
+      parameters:
+        - name: commentId
+          in: path
+          description: >-
+            ObjectId do setup.
+          required: true
+          schema:
+            $ref: '#/components/schemas/ObjectID'
+
       requestBody:
         content:
           application/json:
@@ -350,6 +360,31 @@ paths:
       responses:
         '204':
           description: 'The resource was updated successfully.'
+
+        default:
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+        - Comentário
+      description: >-
+        Remove um comentário.
+
+      parameters:
+        - name: commentId
+          in: path
+          description: >-
+            ObjectId do setup.
+          required: true
+          schema:
+            $ref: '#/components/schemas/ObjectID'
+
+      responses:
+        '204':
+          description: 'The resource was deleted successfully.'
 
         default:
           description: Invalid request.
