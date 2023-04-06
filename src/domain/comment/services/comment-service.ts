@@ -46,4 +46,14 @@ export class CommentService implements ICommentService {
 
     await this.commentRepository.updateComment(commentId, params);
   }
+
+  async deleteComment(commentId: string): Promise<void> {
+    const comment = await this.commentRepository.getCommentById(commentId);
+
+    if (!comment) {
+      throw new NotFoundError('Comentário não encontrado.');
+    }
+
+    await this.commentRepository.deleteComment(commentId);
+  }
 }
