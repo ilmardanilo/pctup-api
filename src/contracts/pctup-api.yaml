@@ -392,6 +392,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+
+  /comments/setups/{setupId}:
+    get:
+      tags:
+        - Comentário
+      description: >-
+        Lista os comentários de um setup.
+
+      parameters:
+        - name: setupId
+          in: path
+          description: >-
+            ObjectId do setup.
+          required: true
+          schema:
+            $ref: '#/components/schemas/ObjectID'
+
+      responses:
+        '200':
+          description: 'Successful request.'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CommentResponse'
+
+        default:
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 servers:
   - url: '/api/v1'
 components:
