@@ -58,4 +58,17 @@ export class CommentRepository implements ICommentRepository {
       _id: new Types.ObjectId(commentId),
     });
   }
+
+  async getCommentsBySetupId(setupId: string): Promise<IComment[]> {
+    const comments = (await this.commentCollection
+      .find({ setupId: new Types.ObjectId(setupId) })
+      .lean()) as unknown as IComment[];
+
+    return comments.map((comment) => ({
+      ...comment,
+      _id: String(comment._id),
+      usuarioId: String(comment.usuarioId),
+      setupId: String(comment.setupId),
+    }));
+  }
 }
