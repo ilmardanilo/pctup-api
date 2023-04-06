@@ -56,4 +56,14 @@ export class CommentService implements ICommentService {
 
     await this.commentRepository.deleteComment(commentId);
   }
+
+  async getCommentsBySetupId(setupId: string): Promise<IComment[]> {
+    const setup = await this.setupRepository.getSetupById(setupId);
+
+    if (!setup) {
+      throw new NotFoundError('Setup não encontrado.');
+    }
+
+    return await this.commentRepository.getCommentsBySetupId(setupId);
+  }
 }
