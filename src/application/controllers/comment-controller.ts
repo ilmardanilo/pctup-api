@@ -41,4 +41,19 @@ export class CommentController {
       handleError(res, error);
     }
   };
+
+  deleteComment = async (
+    req: Request<{ commentId: string }, {}, {}, {}>,
+    res: Response,
+  ) => {
+    try {
+      const { commentId } = req.params;
+
+      await this.commentService.deleteComment(commentId);
+
+      res.status(204).json();
+    } catch (error) {
+      handleError(res, error);
+    }
+  };
 }
