@@ -3,7 +3,9 @@ import { ILikeRepository } from '../../../domain/like/repository/like-repository
 import {
   ILike,
   IParamsCreateLike,
+  IParamsGetLikeByUserIdAndSetupId,
 } from '../../../domain/like/entity/interfaces/like-interface';
+import { Types } from 'mongoose';
 
 export class LikeRepository implements ILikeRepository {
   private readonly likeCollection = MLike;
@@ -13,11 +15,29 @@ export class LikeRepository implements ILikeRepository {
 
     const like = result.toObject();
 
-    return {
-      ...like,
-      _id: like._id.toString(),
-      usuarioId: like.usuarioId.toString(),
-      setupId: like.setupId.toString(),
-    } as unknown as ILike;
+    return likeToDomain(like);
+  }
+
+  async getLikeByUserIdAndSetupId({
+    usuarioId,
+    setupId,
+  }: IParamsGetLikeByUserIdAndSetupId): Promise<ILike | null> {
+    const like = await this.likeCollection
+      .findOne({
+        usuarioId: new Types.ObjectId(usuarioId),
+        setupId: new Types.ObjectId(setupId),
+      })
+      .lean();
+
+    return like && likeToDomain(like);
   }
 }
+
+const likeToDomain = (like: any): ILike => {
+  return {
+    ...like,
+    _id: like._id.toString(),
+    usuarioId: like.usuarioId.toString(),
+    setupId: like.setupId.toString(),
+  };
+};

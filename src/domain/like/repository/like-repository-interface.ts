@@ -1,5 +1,12 @@
-import { ILike, IParamsCreateLike } from '../entity/interfaces/like-interface';
+import {
+  ILike,
+  IParamsCreateLike,
+  IParamsGetLikeByUserIdAndSetupId,
+} from '../entity/interfaces/like-interface';
 
 export interface ILikeRepository {
   createLike(params: IParamsCreateLike): Promise<ILike>;
+  getLikeByUserIdAndSetupId(
+    params: IParamsGetLikeByUserIdAndSetupId,
+  ): Promise<ILike | null>;
 }
