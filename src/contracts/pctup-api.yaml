@@ -429,7 +429,7 @@ paths:
   /likes:
     post:
       tags:
-        - Curtir
+        - Curtida
       description: >-
         Adiciona uma curtida.
       requestBody:
@@ -453,6 +453,35 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+
+  /favorites:
+    post:
+      tags:
+        - Favorito
+      description: >-
+        Adiciona um favorito.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddFavorite'
+        required: true
+
+      responses:
+        '201':
+          description: 'Successful request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FavoriteResponse'
+
+        default:
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
 servers:
   - url: '/api/v1'
 components:
@@ -627,6 +656,27 @@ components:
         - 'setupId'
 
     LikeResponse:
+      properties:
+        _id:
+          $ref: '#/components/schemas/ObjectID'
+        usuarioId:
+          $ref: '#/components/schemas/ObjectID'
+        setupId:
+          $ref: '#/components/schemas/ObjectID'
+        createdAt:
+          $ref: '#/components/schemas/DateTime'
+
+    AddFavorite:
+      properties:
+        usuarioId:
+          $ref: '#/components/schemas/ObjectID'
+        setupId:
+          $ref: '#/components/schemas/ObjectID'
+      required:
+        - 'usuarioId'
+        - 'setupId'
+
+    FavoriteResponse:
       properties:
         _id:
           $ref: '#/components/schemas/ObjectID'
