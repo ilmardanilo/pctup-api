@@ -4,6 +4,7 @@ import {
   userRouter,
   setupRouter,
   commentRouter,
+  likeRouter,
 } from '../routes';
 
 export const setupRoutes = (app: Express): void => {
@@ -12,4 +13,5 @@ export const setupRoutes = (app: Express): void => {
   app.use('/api/v1', setupRouter);
   app.use('/api/v1', setupRouter);
   app.use('/api/v1', commentRouter);
+  app.use('/api/v1', likeRouter);
 };
