@@ -5,6 +5,7 @@ import {
   setupRouter,
   commentRouter,
   likeRouter,
+  favoriteRouter,
 } from '../routes';
 
 export const setupRoutes = (app: Express): void => {
@@ -14,4 +15,5 @@ export const setupRoutes = (app: Express): void => {
   app.use('/api/v1', setupRouter);
   app.use('/api/v1', commentRouter);
   app.use('/api/v1', likeRouter);
+  app.use('/api/v1', favoriteRouter);
 };

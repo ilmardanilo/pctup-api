@@ -3,3 +3,4 @@ export * from './user-routes';
 export * from './setup-routes';
 export * from './comment-routes';
 export * from './like-routes';
+export * from './favorite-routes';
