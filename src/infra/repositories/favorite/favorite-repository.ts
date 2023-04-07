@@ -3,7 +3,9 @@ import { IFavoriteRepository } from '../../../domain/favorite/repository/favorit
 import {
   IFavorite,
   IParamsCreateFavorite,
+  IParamsGetFavoriteByUserIdAndSetupId,
 } from '../../../domain/favorite/entity/interfaces/favorite-interface';
+import { Types } from 'mongoose';
 
 export class FavoriteRepository implements IFavoriteRepository {
   private readonly favoriteCollection = MFavorite;
@@ -13,11 +15,29 @@ export class FavoriteRepository implements IFavoriteRepository {
 
     const favorite = result.toObject();
 
-    return {
-      ...favorite,
-      _id: favorite._id.toString(),
-      usuarioId: favorite.usuarioId.toString(),
-      setupId: favorite.setupId.toString(),
-    } as unknown as IFavorite;
+    return favoriteToDomain(favorite);
+  }
+
+  async getFavoriteByUserIdAndSetupId({
+    usuarioId,
+    setupId,
+  }: IParamsGetFavoriteByUserIdAndSetupId): Promise<IFavorite | null> {
+    const favorite = await this.favoriteCollection
+      .findOne({
+        usuarioId: new Types.ObjectId(usuarioId),
+        setupId: new Types.ObjectId(setupId),
+      })
+      .lean();
+
+    return favorite && favoriteToDomain(favorite);
   }
 }
+
+const favoriteToDomain = (favorite: any): IFavorite => {
+  return {
+    ...favorite,
+    _id: favorite._id.toString(),
+    usuarioId: favorite.usuarioId.toString(),
+    setupId: favorite.setupId.toString(),
+  };
+};
