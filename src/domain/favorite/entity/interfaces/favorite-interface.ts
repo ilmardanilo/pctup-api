@@ -5,7 +5,6 @@ export interface IFavorite {
   usuarioId: ObjectId | string;
   setupId: ObjectId | string;
   createdAt: Date;
-  updatedAt?: Date;
 }
 
 export interface IParamsCreateFavorite {

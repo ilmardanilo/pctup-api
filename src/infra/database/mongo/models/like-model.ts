@@ -15,10 +15,6 @@ const LikeSchema = new mongoose.Schema(
       required: true,
       default: Date.now,
     },
-    updatedAt: {
-      type: Date,
-      required: false,
-    },
   },
   { collection: 'curtida', versionKey: false },
 );

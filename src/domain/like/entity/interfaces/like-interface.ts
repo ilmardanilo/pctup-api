@@ -5,7 +5,6 @@ export interface ILike {
   usuarioId: ObjectId | string;
   setupId: ObjectId | string;
   createdAt: Date;
-  updatedAt?: Date;
 }
 
 export interface IParamsCreateLike {

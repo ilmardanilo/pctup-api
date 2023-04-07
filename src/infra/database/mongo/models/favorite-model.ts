@@ -15,10 +15,6 @@ const FavoriteSchema = new mongoose.Schema(
       required: true,
       default: Date.now,
     },
-    updatedAt: {
-      type: Date,
-      required: false,
-    },
   },
   { collection: 'favorito', versionKey: false },
 );
