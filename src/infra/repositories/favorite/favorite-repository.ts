@@ -18,18 +18,16 @@ export class FavoriteRepository implements IFavoriteRepository {
     return favoriteToDomain(favorite);
   }
 
-  async getFavorite({
-    usuarioId,
-    setupId,
-  }: IParamsGetFavorite): Promise<IFavorite | null> {
-    const favorite = await this.favoriteCollection
-      .findOne({
-        usuarioId: new Types.ObjectId(usuarioId),
-        setupId: new Types.ObjectId(setupId),
-      })
-      .lean();
+  async getFavorite(params: IParamsGetFavorite): Promise<IFavorite | null> {
+    const favorite = await this.favoriteCollection.findOne(params).lean();
 
     return favorite && favoriteToDomain(favorite);
+  }
+
+  async removeFavorite(favoriteId: string): Promise<void> {
+    await this.favoriteCollection.deleteOne({
+      _id: new Types.ObjectId(favoriteId),
+    });
   }
 }
 
