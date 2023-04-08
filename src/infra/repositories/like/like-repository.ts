@@ -41,6 +41,12 @@ export class LikeRepository implements ILikeRepository {
 
     return like && likeToDomain(like);
   }
+
+  async removeLike(likeId: string): Promise<void> {
+    await this.likeCollection.deleteOne({
+      _id: new Types.ObjectId(likeId),
+    });
+  }
 }
 
 const likeToDomain = (like: any): ILike => {
