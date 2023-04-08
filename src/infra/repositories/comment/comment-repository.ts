@@ -15,12 +15,7 @@ export class CommentRepository implements ICommentRepository {
 
     const comment = result.toObject();
 
-    return {
-      ...comment,
-      _id: comment._id.toString(),
-      usuarioId: comment.usuarioId.toString(),
-      setupId: comment.setupId.toString(),
-    } as unknown as IComment;
+    return toCommentDomain(comment);
   }
 
   async getCommentById(commentId: string): Promise<IComment> {
@@ -28,14 +23,7 @@ export class CommentRepository implements ICommentRepository {
       .findOne({ _id: new Types.ObjectId(commentId) })
       .lean()) as unknown as IComment;
 
-    return (
-      comment && {
-        ...comment,
-        _id: String(comment._id),
-        usuarioId: String(comment.usuarioId),
-        setupId: String(comment.setupId),
-      }
-    );
+    return comment && toCommentDomain(comment);
   }
 
   async updateComment(
@@ -64,11 +52,17 @@ export class CommentRepository implements ICommentRepository {
       .find({ setupId: new Types.ObjectId(setupId) })
       .lean()) as unknown as IComment[];
 
-    return comments.map((comment) => ({
-      ...comment,
-      _id: String(comment._id),
-      usuarioId: String(comment.usuarioId),
-      setupId: String(comment.setupId),
-    }));
+    return comments.map((comment) => {
+      return toCommentDomain(comment);
+    });
   }
 }
+
+const toCommentDomain = (comment: any): IComment => {
+  return {
+    ...comment,
+    _id: String(comment._id),
+    usuarioId: String(comment.usuarioId),
+    setupId: String(comment.setupId),
+  };
+};
