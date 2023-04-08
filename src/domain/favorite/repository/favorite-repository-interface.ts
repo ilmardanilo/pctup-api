@@ -8,4 +8,5 @@ export interface IFavoriteRepository {
   createFavorite(params: IParamsCreateFavorite): Promise<IFavorite>;
   getFavorite(params: IParamsGetFavorite): Promise<IFavorite | null>;
   removeFavorite(favoriteId: string): Promise<void>;
+  getFavoritesByUserId(userId: string): Promise<IFavorite[]>;
 }

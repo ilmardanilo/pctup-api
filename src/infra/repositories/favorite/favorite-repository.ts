@@ -29,6 +29,29 @@ export class FavoriteRepository implements IFavoriteRepository {
       _id: new Types.ObjectId(favoriteId),
     });
   }
+
+  async getFavoritesByUserId(userId: string): Promise<IFavorite[]> {
+    const favorites = await this.favoriteCollection.aggregate([
+      {
+        $match: {
+          usuarioId: new Types.ObjectId(userId),
+        },
+      },
+      {
+        $lookup: {
+          from: 'setup',
+          localField: 'setupId',
+          foreignField: '_id',
+          as: 'setup',
+        },
+      },
+      {
+        $unwind: '$setup',
+      },
+    ]);
+
+    return favorites && favorites.map((favorite) => favoriteToDomain(favorite));
+  }
 }
 
 const favoriteToDomain = (favorite: any): IFavorite => {
@@ -37,5 +60,10 @@ const favoriteToDomain = (favorite: any): IFavorite => {
     _id: favorite._id.toString(),
     usuarioId: favorite.usuarioId.toString(),
     setupId: favorite.setupId.toString(),
+    setup: {
+      ...favorite?.setup,
+      _id: favorite?.setup?._id.toString(),
+      usuarioId: favorite?.setup?.usuarioId.toString(),
+    },
   };
 };
