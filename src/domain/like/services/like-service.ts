@@ -36,4 +36,14 @@ export class LikeService implements ILikeService {
 
     return await this.likeRepository.createLike({ usuarioId, setupId });
   }
+
+  async removeLike(likeId: string): Promise<void> {
+    const like = await this.likeRepository.getLikeById(likeId);
+
+    if (!like) {
+      throw new NotFoundError('Curtida não encontrada.');
+    }
+
+    await this.likeRepository.removeLike(likeId);
+  }
 }
