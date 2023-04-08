@@ -454,6 +454,33 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+  /likes/{likeId}:
+    delete:
+      tags:
+        - Curtida
+      description: >-
+        Remove uma curtida.
+
+      parameters:
+        - name: likeId
+          in: path
+          description: >-
+            ObjectId do like.
+          required: true
+          schema:
+            $ref: '#/components/schemas/ObjectID'
+
+      responses:
+        '204':
+          description: 'The resource was deleted successfully.'
+
+        default:
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
   /favorites:
     post:
       tags:
