@@ -42,4 +42,16 @@ export class FavoriteService implements IFavoriteService {
 
     return await this.favoriteRepository.createFavorite({ usuarioId, setupId });
   }
+
+  async removeFavorite(favoriteId: string): Promise<void> {
+    const favorite = await this.favoriteRepository.getFavorite({
+      _id: favoriteId,
+    });
+
+    if (!favorite) {
+      throw new NotFoundError('Favorito não encontrado.');
+    }
+
+    await this.favoriteRepository.removeFavorite(favoriteId);
+  }
 }
