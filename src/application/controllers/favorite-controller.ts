@@ -21,4 +21,19 @@ export class FavoriteController {
       handleError(res, error);
     }
   };
+
+  removeFavorite = async (
+    req: Request<{ favoriteId: string }, {}, {}, {}>,
+    res: Response,
+  ) => {
+    try {
+      const { favoriteId } = req.params;
+
+      await this.favoriteService.removeFavorite(favoriteId);
+
+      res.status(204).json();
+    } catch (error) {
+      handleError(res, error);
+    }
+  };
 }

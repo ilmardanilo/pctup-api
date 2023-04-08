@@ -6,5 +6,6 @@ const favoriteController = FavoriteControllerFactory.create();
 const favoriteRouter = Router();
 
 favoriteRouter.post('/favorites', auth, favoriteController.addFavorite);
+favoriteRouter.delete('/favorites/:favoriteId', auth, favoriteController.removeFavorite);
 
 export { favoriteRouter };
