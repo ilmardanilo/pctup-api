@@ -6,5 +6,6 @@ const likeController = LikeControllerFactory.create();
 const likeRouter = Router();
 
 likeRouter.post('/likes', auth, likeController.addLike);
+likeRouter.delete('/likes/:likeId', auth, likeController.removeLike);
 
 export { likeRouter };

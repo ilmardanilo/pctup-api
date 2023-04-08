@@ -21,4 +21,19 @@ export class LikeController {
       handleError(res, error);
     }
   };
+
+  removeLike = async (
+    req: Request<{ likeId: string }, {}, {}, {}>,
+    res: Response,
+  ) => {
+    try {
+      const { likeId } = req.params;
+
+      await this.likeService.removeLike(likeId);
+
+      res.status(204).json();
+    } catch (error) {
+      handleError(res, error);
+    }
+  };
 }
