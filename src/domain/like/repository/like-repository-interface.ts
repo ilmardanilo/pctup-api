@@ -8,4 +8,5 @@ export interface ILikeRepository {
   createLike(params: IParamsCreateLike): Promise<ILike>;
   getLike(params: IParamsGetLikeByUserIdAndSetupId): Promise<ILike | null>;
   removeLike(likeId: string): Promise<void>;
+  getLikesByUserId(userId: string): Promise<ILike[]>;
 }
