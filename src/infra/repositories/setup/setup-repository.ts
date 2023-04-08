@@ -16,11 +16,7 @@ export class SetupRepository implements ISetupRepository {
 
     const setup = result.toObject();
 
-    return {
-      ...setup,
-      _id: setup._id.toString(),
-      usuarioId: setup.usuarioId.toString(),
-    } as unknown as ISetup;
+    return setupToDomain(setup);
   }
 
   async getSetups(params: IParamsGetSetups): Promise<ISetup[]> {
@@ -28,11 +24,9 @@ export class SetupRepository implements ISetupRepository {
       .find(params)
       .lean()) as unknown as ISetup[];
 
-    return setups.map((setup) => ({
-      ...setup,
-      _id: String(setup._id),
-      usuarioId: String(setup.usuarioId),
-    }));
+    return setups.map((setup) => {
+      return setupToDomain(setup);
+    });
   }
 
   async getSetupById(setupId: string): Promise<ISetup | null> {
@@ -40,13 +34,7 @@ export class SetupRepository implements ISetupRepository {
       .findOne({ _id: new Types.ObjectId(setupId) })
       .lean()) as unknown as ISetup;
 
-    return (
-      setup && {
-        ...setup,
-        _id: String(setup._id),
-        usuarioId: String(setup.usuarioId),
-      }
-    );
+    return setup && setupToDomain(setup);
   }
 
   async deleteSetup(setupId: string): Promise<void> {
@@ -68,3 +56,11 @@ export class SetupRepository implements ISetupRepository {
     );
   }
 }
+
+const setupToDomain = (setup: any): ISetup => {
+  return {
+    ...setup,
+    _id: String(setup._id),
+    usuarioId: String(setup.usuarioId),
+  };
+};
