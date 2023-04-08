@@ -31,11 +31,10 @@ export class FavoriteService implements IFavoriteService {
       throw new NotFoundError('Setup não encontrado.');
     }
 
-    const favorite =
-      await this.favoriteRepository.getFavoriteByUserIdAndSetupId({
-        usuarioId,
-        setupId,
-      });
+    const favorite = await this.favoriteRepository.getFavorite({
+      usuarioId,
+      setupId,
+    });
 
     if (favorite) {
       throw new BusinessError('O usúario já favoritou esse setup.');

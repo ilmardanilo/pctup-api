@@ -3,7 +3,7 @@ import { IFavoriteRepository } from '../../../domain/favorite/repository/favorit
 import {
   IFavorite,
   IParamsCreateFavorite,
-  IParamsGetFavoriteByUserIdAndSetupId,
+  IParamsGetFavorite,
 } from '../../../domain/favorite/entity/interfaces/favorite-interface';
 import { Types } from 'mongoose';
 
@@ -18,10 +18,10 @@ export class FavoriteRepository implements IFavoriteRepository {
     return favoriteToDomain(favorite);
   }
 
-  async getFavoriteByUserIdAndSetupId({
+  async getFavorite({
     usuarioId,
     setupId,
-  }: IParamsGetFavoriteByUserIdAndSetupId): Promise<IFavorite | null> {
+  }: IParamsGetFavorite): Promise<IFavorite | null> {
     const favorite = await this.favoriteCollection
       .findOne({
         usuarioId: new Types.ObjectId(usuarioId),

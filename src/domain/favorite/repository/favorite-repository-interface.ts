@@ -1,12 +1,10 @@
 import {
   IFavorite,
   IParamsCreateFavorite,
-  IParamsGetFavoriteByUserIdAndSetupId,
+  IParamsGetFavorite,
 } from '../entity/interfaces/favorite-interface';
 
 export interface IFavoriteRepository {
   createFavorite(params: IParamsCreateFavorite): Promise<IFavorite>;
-  getFavoriteByUserIdAndSetupId(
-    params: IParamsGetFavoriteByUserIdAndSetupId,
-  ): Promise<IFavorite | null>;
+  getFavorite(params: IParamsGetFavorite): Promise<IFavorite | null>;
 }

@@ -12,5 +12,8 @@ export interface IParamsCreateFavorite {
   setupId: string;
 }
 
-export interface IParamsGetFavoriteByUserIdAndSetupId
-  extends IParamsCreateFavorite {}
+export interface IParamsGetFavorite {
+  _id?: string;
+  usuarioId?: string;
+  setupId?: string;
+}
