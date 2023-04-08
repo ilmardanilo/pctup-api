@@ -9,4 +9,5 @@ export interface ILikeRepository {
   getLikeByUserIdAndSetupId(
     params: IParamsGetLikeByUserIdAndSetupId,
   ): Promise<ILike | null>;
+  getLikeById(likeId: string): Promise<ILike | null>;
 }

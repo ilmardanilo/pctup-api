@@ -31,6 +31,16 @@ export class LikeRepository implements ILikeRepository {
 
     return like && likeToDomain(like);
   }
+
+  async getLikeById(likeId: string): Promise<ILike | null> {
+    const like = await this.likeCollection
+      .findOne({
+        _id: new Types.ObjectId(likeId),
+      })
+      .lean();
+
+    return like && likeToDomain(like);
+  }
 }
 
 const likeToDomain = (like: any): ILike => {
