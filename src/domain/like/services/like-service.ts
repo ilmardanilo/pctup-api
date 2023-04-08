@@ -46,4 +46,14 @@ export class LikeService implements ILikeService {
 
     await this.likeRepository.removeLike(likeId);
   }
+
+  async getLikesByUserId(userId: string): Promise<ILike[]> {
+    const user = await this.userRepository.getUserById(userId);
+
+    if (!user) {
+      throw new NotFoundError('Usuário não encontrado.');
+    }
+
+    return await this.likeRepository.getLikesByUserId(userId);
+  }
 }
