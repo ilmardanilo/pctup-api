@@ -12,4 +12,8 @@ export interface IParamsCreateLike {
   setupId: string;
 }
 
-export interface IParamsGetLikeByUserIdAndSetupId extends IParamsCreateLike {}
+export interface IParamsGetLikeByUserIdAndSetupId {
+  _id?: string;
+  usuarioId?: string;
+  setupId?: string;
+}

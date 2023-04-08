@@ -25,7 +25,7 @@ export class LikeService implements ILikeService {
       throw new NotFoundError('Setup não encontrado.');
     }
 
-    const like = await this.likeRepository.getLikeByUserIdAndSetupId({
+    const like = await this.likeRepository.getLike({
       usuarioId,
       setupId,
     });
@@ -38,7 +38,7 @@ export class LikeService implements ILikeService {
   }
 
   async removeLike(likeId: string): Promise<void> {
-    const like = await this.likeRepository.getLikeById(likeId);
+    const like = await this.likeRepository.getLike({ _id: likeId });
 
     if (!like) {
       throw new NotFoundError('Curtida não encontrada.');

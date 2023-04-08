@@ -18,26 +18,10 @@ export class LikeRepository implements ILikeRepository {
     return likeToDomain(like);
   }
 
-  async getLikeByUserIdAndSetupId({
-    usuarioId,
-    setupId,
-  }: IParamsGetLikeByUserIdAndSetupId): Promise<ILike | null> {
-    const like = await this.likeCollection
-      .findOne({
-        usuarioId: new Types.ObjectId(usuarioId),
-        setupId: new Types.ObjectId(setupId),
-      })
-      .lean();
-
-    return like && likeToDomain(like);
-  }
-
-  async getLikeById(likeId: string): Promise<ILike | null> {
-    const like = await this.likeCollection
-      .findOne({
-        _id: new Types.ObjectId(likeId),
-      })
-      .lean();
+  async getLike(
+    params: IParamsGetLikeByUserIdAndSetupId,
+  ): Promise<ILike | null> {
+    const like = await this.likeCollection.findOne(params).lean();
 
     return like && likeToDomain(like);
   }
