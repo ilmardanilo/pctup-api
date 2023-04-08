@@ -481,6 +481,39 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+  /likes/users/{userId}:
+    get:
+      tags:
+        - Curtida
+      description: >-
+        Retorna todas as curtidas de um usuário.
+
+      parameters:
+        - name: userId
+          in: path
+          description: >-
+            ObjectId do usuário.
+          required: true
+          schema:
+            $ref: '#/components/schemas/ObjectID'
+
+      responses:
+        '200':
+          description: 'Successful request.'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LikeResponse'
+
+        default:
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
   /favorites:
     post:
       tags:
