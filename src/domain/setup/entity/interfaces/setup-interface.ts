@@ -7,9 +7,14 @@ export interface ISetup {
   descricao: string;
   estaAtivo: boolean;
   estaPublico: boolean;
-  imagens?: [string];
+  imagens?: [IImage];
   createdAt: Date;
   updatedAt?: Date;
+}
+
+export interface IImage {
+  publicId: string;
+  url: string;
 }
 
 export interface IParamsCreateSetup {
@@ -28,4 +33,12 @@ export interface IParamsUpdateSetup {
   titulo?: string;
   descricao?: string;
   estaPublico?: boolean;
+}
+
+export interface IParamsAddImage {
+  setupId: string;
+  file: {
+    path: string;
+    mimeType: string;
+  };
 }

@@ -4,6 +4,7 @@ import {
   IParamsCreateSetup,
   IParamsGetSetups,
   IParamsUpdateSetup,
+  IImage,
 } from '../../../domain/setup/entity/interfaces/setup-interface';
 import { ISetupRepository } from '../../../domain/setup/repository/setup-repository-interface';
 import { Types } from 'mongoose';
@@ -51,6 +52,17 @@ export class SetupRepository implements ISetupRepository {
         $set: {
           ...params,
           updatedAt: new Date(),
+        },
+      },
+    );
+  }
+
+  async addImage(setupId: string, image: IImage): Promise<void> {
+    await this.setupCollection.updateOne(
+      { _id: new Types.ObjectId(setupId) },
+      {
+        $push: {
+          imagens: image,
         },
       },
     );
