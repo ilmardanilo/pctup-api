@@ -1,5 +1,19 @@
 import mongoose from 'mongoose';
 
+const ImageSchema = new mongoose.Schema(
+  {
+    publicId: {
+      type: String,
+      required: true,
+    },
+    url: {
+      type: String,
+      required: true,
+    },
+  },
+  { _id: false },
+);
+
 const SetupSchema = new mongoose.Schema(
   {
     usuarioId: {
@@ -25,7 +39,7 @@ const SetupSchema = new mongoose.Schema(
       default: false,
     },
     imagens: {
-      type: [String],
+      type: [ImageSchema],
       required: false,
     },
     createdAt: {
