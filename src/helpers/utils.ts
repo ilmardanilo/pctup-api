@@ -20,3 +20,13 @@ export const handleError = (res: Response, error: any) => {
 
   return res.status(500).json({ message: 'Unexpected error!' });
 };
+
+export const hasTypeImageAllowed = (mimeType: string): boolean => {
+  const allowedImageTypes = ['png', 'jpg', 'jpeg'];
+
+  const typeImage = mimeType.split('/')[1];
+
+  return allowedImageTypes.some((allowedType) => {
+    return allowedType === typeImage;
+  });
+};
