@@ -2,6 +2,7 @@
 import { Response } from 'express';
 import { HttpError } from 'express-openapi-validator/dist/framework/types';
 import { Logger } from 'traceability';
+import fs from 'node:fs';
 
 export const handleError = (res: Response, error: any) => {
   if (error instanceof HttpError) {
@@ -28,5 +29,13 @@ export const hasTypeImageAllowed = (mimeType: string): boolean => {
 
   return allowedImageTypes.some((allowedType) => {
     return allowedType === typeImage;
+  });
+};
+
+export const removeLocalImage = (pathImage: string): void => {
+  fs.unlink(pathImage, (error) => {
+    if (error) {
+      throw error;
+    }
   });
 };
