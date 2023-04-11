@@ -81,4 +81,31 @@ export class SetupController {
       handleError(res, error);
     }
   };
+
+  addImage = async (
+    req: Request<{ setupId: string }, {}, {}, {}>,
+    res: Response,
+  ) => {
+    try {
+      const { setupId } = req.params;
+
+      const image = req.file;
+
+      if (!image) {
+        return res.status(400).json({ message: 'O campo image é obrigatório' });
+      }
+
+      const result = await this.setupService.addImage({
+        setupId,
+        file: {
+          path: image.path,
+          mimeType: image.mimetype,
+        },
+      });
+
+      res.status(200).json(result);
+    } catch (error) {
+      handleError(res, error);
+    }
+  };
 }

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { auth } from '../../application/middlewares/auth-middleware';
+import { auth, uploadImage } from '../../application/middlewares';
 import { SetupControllerFactory } from '../factories/setup/setup-controller-factory';
 
 const setupController = SetupControllerFactory.create();
@@ -10,5 +10,6 @@ setupRouter.get('/setups', setupController.getSetups);
 setupRouter.delete('/setups/:setupId', auth, setupController.deleteSetup);
 setupRouter.put('/setups/:setupId', auth, setupController.updateSetup);
 setupRouter.get('/setups/users/:userId', auth, setupController.getSetupsByUserId);
+setupRouter.post('/setups/upload-image/:setupId', auth, uploadImage.single('image'), setupController.addImage);
 
 export { setupRouter };
