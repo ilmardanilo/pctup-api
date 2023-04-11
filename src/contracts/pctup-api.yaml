@@ -301,6 +301,38 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+  /setups/upload-image/{setupId}:
+    post:
+      tags:
+        - Setup
+      description: >-
+        Adiciona uma imagem no setup. A imagem deve ser enviada no body usando a estrutura **multipart/form-data** onde o *name* deve ser **image** e o *value* o **arquivo** da imagem nos formatos png, jpg ou jpeg.
+
+      parameters:
+        - name: setupId
+          in: path
+          description: >-
+            ObjectId do setup.
+          required: true
+          schema:
+            $ref: '#/components/schemas/ObjectID'
+
+      responses:
+        '200':
+          description: 'Successful request.'
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/Image'
+
+        default:
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
   /comments:
     post:
       tags:
@@ -722,11 +754,18 @@ components:
         imagens:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/Image'
         createdAt:
           $ref: '#/components/schemas/DateTime'
         updatedAt:
           $ref: '#/components/schemas/DateTime'
+
+    Image:
+      properties:
+        publicId:
+          type: string
+        url:
+          type: string
 
     ParamsUpdateSetup:
       properties:
