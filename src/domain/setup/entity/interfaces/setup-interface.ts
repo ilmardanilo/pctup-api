@@ -7,7 +7,7 @@ export interface ISetup {
   descricao: string;
   estaAtivo: boolean;
   estaPublico: boolean;
-  imagens?: [IImage];
+  imagens?: IImage[];
   createdAt: Date;
   updatedAt?: Date;
 }
@@ -33,6 +33,7 @@ export interface IParamsUpdateSetup {
   titulo?: string;
   descricao?: string;
   estaPublico?: boolean;
+  imagens?: IImage[];
 }
 
 export interface IParamsAddImage {

@@ -76,6 +76,32 @@ export class SetupService implements ISetupService {
     await this.setupRepository.updateSetupById(setupId, params);
   }
 
+  async removeImage(setupId: string, publicId: string): Promise<void> {
+    const setup = await this.setupRepository.getSetupById(setupId);
+
+    if (!setup) {
+      throw new NotFoundError('Setup não encontrado.');
+    }
+
+    const hasImageWithPublicId = setup.imagens?.some(
+      (image) => image.publicId === publicId,
+    );
+
+    if (!hasImageWithPublicId) {
+      throw new BusinessError('Não existe imagem com esse publicId no setup.');
+    }
+
+    await this.cloudinaryService.delete(publicId);
+
+    const remainingImages = setup.imagens?.filter(
+      (image) => image.publicId !== publicId,
+    );
+
+    await this.setupRepository.updateSetupById(setupId, {
+      imagens: remainingImages,
+    });
+  }
+
   async addImage({ setupId, file }: IParamsAddImage): Promise<IImage> {
     try {
       if (!hasTypeImageAllowed(file.mimeType)) {

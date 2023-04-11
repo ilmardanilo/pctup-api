@@ -13,4 +13,5 @@ export interface ISetupService {
   deleteSetup(setupId: string): Promise<void>;
   updateSetupById(setupId: string, params: IParamsUpdateSetup): Promise<void>;
   addImage(params: IParamsAddImage): Promise<IImage>;
+  removeImage(setupId: string, publicId: string): Promise<void>;
 }
