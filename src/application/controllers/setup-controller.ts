@@ -108,4 +108,21 @@ export class SetupController {
       handleError(res, error);
     }
   };
+
+  removeImage = async (
+    req: Request<{ setupId: string }, {}, {}, { publicId: string }>,
+    res: Response,
+  ) => {
+    try {
+      const { setupId } = req.params;
+
+      const { publicId } = req.query;
+
+      await this.setupService.removeImage(setupId, publicId);
+
+      res.status(204).json();
+    } catch (error) {
+      handleError(res, error);
+    }
+  };
 }

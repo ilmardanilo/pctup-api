@@ -11,5 +11,6 @@ setupRouter.delete('/setups/:setupId', auth, setupController.deleteSetup);
 setupRouter.put('/setups/:setupId', auth, setupController.updateSetup);
 setupRouter.get('/setups/users/:userId', auth, setupController.getSetupsByUserId);
 setupRouter.post('/setups/upload-image/:setupId', auth, uploadImage.single('image'), setupController.addImage);
+setupRouter.delete('/setups/:setupId/images', auth, setupController.removeImage);
 
 export { setupRouter };
