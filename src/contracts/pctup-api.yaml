@@ -301,7 +301,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /setups/upload-image/{setupId}:
+  /setups/{setupId}/images:
     post:
       tags:
         - Setup
@@ -333,7 +333,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /setups/{setupId}/images:
     delete:
       tags:
         - Setup

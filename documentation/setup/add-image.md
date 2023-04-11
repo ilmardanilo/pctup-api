@@ -16,7 +16,7 @@
 
 > ## Caso de sucesso
 
-1. ✅ Recebe uma requisição do tipo **POST** na rota **/api/v1/setups/upload-image/{setupId}**
+1. ✅ Recebe uma requisição do tipo **POST** na rota **/api/v1/setups/{setupId}/images**
 2. ✅ **Verifica** se foi fornecido uma imagem
 3. ✅ **Verifica** se o formato da imagem é do tipo png, jpg ou jpeg
 4. ✅ **Verifica** se existe um setup com o id fornecido
