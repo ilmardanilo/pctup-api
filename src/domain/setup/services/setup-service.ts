@@ -2,16 +2,21 @@ import { ISetupService } from '../entity/interfaces/setup-service-interface';
 import { ISetupRepository } from '../repository/setup-repository-interface';
 import { BusinessError, NotFoundError } from '../../../helpers/errors';
 import {
+  IImage,
+  IParamsAddImage,
   IParamsCreateSetup,
   IParamsUpdateSetup,
   ISetup,
 } from '../entity/interfaces/setup-interface';
 import { IUserRepository } from '../../user/repository/user-repository-interface';
+import { ICloudinaryExternalService } from '../../../infra/external/cloudinary-service';
+import { hasTypeImageAllowed, removeLocalImage } from '../../../helpers/utils';
 
 export class SetupService implements ISetupService {
   constructor(
     private readonly setupRepository: ISetupRepository,
     private readonly userRepository: IUserRepository,
+    private readonly cloudinaryService: ICloudinaryExternalService,
   ) {}
 
   async createSetup(params: IParamsCreateSetup): Promise<ISetup> {
@@ -69,5 +74,34 @@ export class SetupService implements ISetupService {
     }
 
     await this.setupRepository.updateSetupById(setupId, params);
+  }
+
+  async addImage({ setupId, file }: IParamsAddImage): Promise<IImage> {
+    try {
+      if (!hasTypeImageAllowed(file.mimeType)) {
+        throw new BusinessError('A imagem deve ser do tipo png, jpg ou jpeg.');
+      }
+
+      const setup = await this.setupRepository.getSetupById(setupId);
+
+      if (!setup) {
+        throw new NotFoundError('Setup não encontrado.');
+      }
+
+      const { public_id, url } = await this.cloudinaryService.upload(file.path);
+
+      const image: IImage = {
+        publicId: public_id,
+        url,
+      };
+
+      await this.setupRepository.addImage(setupId, image);
+
+      return image;
+    } catch (error) {
+      throw error;
+    } finally {
+      removeLocalImage(file.path);
+    }
   }
 }
