@@ -1,4 +1,7 @@
-import { BusinessError, NotFoundError } from '../../../helpers/errors';
+import {
+  UnprocessableEntityError,
+  NotFoundError,
+} from '../../../helpers/errors';
 import { ISetupRepository } from '../../setup/repository/setup-repository-interface';
 import { IUserRepository } from '../../user/repository/user-repository-interface';
 import {
@@ -37,7 +40,7 @@ export class FavoriteService implements IFavoriteService {
     });
 
     if (favorite) {
-      throw new BusinessError('O usúario já favoritou esse setup.');
+      throw new UnprocessableEntityError('O usúario já favoritou esse setup.');
     }
 
     return await this.favoriteRepository.createFavorite({ usuarioId, setupId });

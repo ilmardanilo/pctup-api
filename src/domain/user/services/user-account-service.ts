@@ -5,7 +5,7 @@ import {
 } from '../entity/interfaces/user-interface';
 import { IUserAccountRepository } from '../repository/user-account-repository-interface';
 import {
-  BusinessError,
+  UnprocessableEntityError,
   ForbiddenError,
   NotFoundError,
 } from '../../../helpers/errors';
@@ -25,7 +25,9 @@ export class UserAccountService implements IUserAccountService {
     const account = await this.userAccountRepository.getAccountByEmail(email);
 
     if (account) {
-      throw new BusinessError('Já existe um usuário com esse email.');
+      throw new UnprocessableEntityError(
+        'Já existe um usuário com esse email.',
+      );
     }
 
     const salt = 12;

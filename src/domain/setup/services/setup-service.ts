@@ -1,6 +1,9 @@
 import { ISetupService } from '../entity/interfaces/setup-service-interface';
 import { ISetupRepository } from '../repository/setup-repository-interface';
-import { BusinessError, NotFoundError } from '../../../helpers/errors';
+import {
+  UnprocessableEntityError,
+  NotFoundError,
+} from '../../../helpers/errors';
 import {
   IImage,
   IParamsAddImage,
@@ -62,7 +65,7 @@ export class SetupService implements ISetupService {
     params: IParamsUpdateSetup,
   ): Promise<void> {
     if (!Object.keys(params).length) {
-      throw new BusinessError(
+      throw new UnprocessableEntityError(
         'Informe pelo menos um parâmetro para ser atualizado.',
       );
     }
@@ -88,7 +91,9 @@ export class SetupService implements ISetupService {
     );
 
     if (!hasImageWithPublicId) {
-      throw new BusinessError('Não existe imagem com esse publicId no setup.');
+      throw new UnprocessableEntityError(
+        'Não existe imagem com esse publicId no setup.',
+      );
     }
 
     await this.cloudinaryService.delete(publicId);
@@ -105,7 +110,9 @@ export class SetupService implements ISetupService {
   async addImage({ setupId, file }: IParamsAddImage): Promise<IImage> {
     try {
       if (!hasTypeImageAllowed(file.mimeType)) {
-        throw new BusinessError('A imagem deve ser do tipo png, jpg ou jpeg.');
+        throw new UnprocessableEntityError(
+          'A imagem deve ser do tipo png, jpg ou jpeg.',
+        );
       }
 
       const setup = await this.setupRepository.getSetupById(setupId);

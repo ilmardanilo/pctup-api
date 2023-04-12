@@ -1,4 +1,7 @@
-import { BusinessError, NotFoundError } from '../../../helpers/errors';
+import {
+  UnprocessableEntityError,
+  NotFoundError,
+} from '../../../helpers/errors';
 import { ISetupRepository } from '../../setup/repository/setup-repository-interface';
 import { IUserRepository } from '../../user/repository/user-repository-interface';
 import { ILike, IParamsCreateLike } from '../entity/interfaces/like-interface';
@@ -31,7 +34,7 @@ export class LikeService implements ILikeService {
     });
 
     if (like) {
-      throw new BusinessError('O usúario já curtiu esse setup.');
+      throw new UnprocessableEntityError('O usúario já curtiu esse setup.');
     }
 
     return await this.likeRepository.createLike({ usuarioId, setupId });
