@@ -29,10 +29,9 @@ export class UserController {
     try {
       const { userId } = req.params;
 
-      await this.userService.updateUserById(
-        userId,
-        req.body as IParamsUpdateUser,
-      );
+      const { ...updateParams } = req.body;
+
+      await this.userService.updateUserById(userId, updateParams);
 
       res.status(204).json();
     } catch (error) {

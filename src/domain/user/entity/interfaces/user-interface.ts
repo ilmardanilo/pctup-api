@@ -35,4 +35,5 @@ export interface IParamsUpdateUser {
   profissao?: string;
   estado?: string;
   cidade?: string;
+  imagem?: IImage;
 }

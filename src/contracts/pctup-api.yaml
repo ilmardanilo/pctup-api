@@ -759,6 +759,8 @@ components:
           type: string
         cidade:
           type: string
+        imagem:
+          $ref: '#/components/schemas/Image'
 
     CreateSetup:
       properties:

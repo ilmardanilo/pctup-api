@@ -17,6 +17,7 @@
 - profissao
 - estado
 - cidade
+- imagem
 
 > ## Caso de sucesso
 
