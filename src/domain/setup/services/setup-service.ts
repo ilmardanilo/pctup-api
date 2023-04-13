@@ -5,7 +5,6 @@ import {
   NotFoundError,
 } from '../../../helpers/errors';
 import {
-  IImage,
   IParamsAddImage,
   IParamsCreateSetup,
   IParamsUpdateSetup,
@@ -13,7 +12,11 @@ import {
 } from '../entity/interfaces/setup-interface';
 import { IUserRepository } from '../../user/repository/user-repository-interface';
 import { ICloudinaryExternalService } from '../../../infra/external/cloudinary-service';
-import { hasTypeImageAllowed, removeLocalImage } from '../../../helpers/utils';
+import {
+  IImage,
+  hasTypeImageAllowed,
+  removeLocalImage,
+} from '../../../helpers/utils';
 
 export class SetupService implements ISetupService {
   constructor(

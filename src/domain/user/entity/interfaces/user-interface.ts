@@ -1,3 +1,4 @@
+import { IImage } from '../../../../helpers/utils';
 import { CARGO } from '../user-constants';
 import { ObjectId } from 'mongoose';
 
@@ -11,6 +12,7 @@ export interface IUser {
   estado?: string;
   cidade?: string;
   cargo: CARGO;
+  imagem: IImage;
   createdAt: Date;
   updatedAt?: Date;
 }

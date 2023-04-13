@@ -1,3 +1,4 @@
+import { IImage } from '../../../../helpers/utils';
 import { ObjectId } from 'mongoose';
 
 export interface ISetup {
@@ -10,11 +11,6 @@ export interface ISetup {
   imagens?: IImage[];
   createdAt: Date;
   updatedAt?: Date;
-}
-
-export interface IImage {
-  publicId: string;
-  url: string;
 }
 
 export interface IParamsCreateSetup {

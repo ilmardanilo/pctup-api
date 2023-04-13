@@ -740,6 +740,8 @@ components:
           type: string
         cargo:
           type: string
+        imagem:
+          $ref: '#/components/schemas/Image'
         createdAt:
           $ref: '#/components/schemas/DateTime'
         updatedAt:

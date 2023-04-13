@@ -1,5 +1,9 @@
-import { CARGO } from '../../../../domain/user/entity/user-constants';
+import {
+  CARGO,
+  IMAGE_DEFAULT,
+} from '../../../../domain/user/entity/user-constants';
 import mongoose from 'mongoose';
+import { ImageSchema } from './setup-model';
 
 const UsuarioSchema = new mongoose.Schema(
   {
@@ -36,6 +40,11 @@ const UsuarioSchema = new mongoose.Schema(
       required: true,
       enum: CARGO,
       default: CARGO.USER,
+    },
+    imagem: {
+      type: ImageSchema,
+      required: true,
+      default: IMAGE_DEFAULT,
     },
     createdAt: {
       type: Date,

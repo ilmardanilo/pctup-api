@@ -3,8 +3,8 @@ import {
   IParamsCreateSetup,
   IParamsUpdateSetup,
   IParamsAddImage,
-  IImage,
 } from './setup-interface';
+import { IImage } from '../../../../helpers/utils';
 
 export interface ISetupService {
   createSetup(params: IParamsCreateSetup): Promise<ISetup>;

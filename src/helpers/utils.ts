@@ -39,3 +39,8 @@ export const removeLocalImage = (pathImage: string): void => {
     }
   });
 };
+
+export interface IImage {
+  publicId: string;
+  url: string;
+}

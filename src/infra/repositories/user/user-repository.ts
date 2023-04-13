@@ -26,6 +26,7 @@ export class UserRepository implements IUserRepository {
           estado: 1,
           cidade: 1,
           cargo: 1,
+          imagem: 1,
           createdAt: 1,
           updatedAt: 1,
         },

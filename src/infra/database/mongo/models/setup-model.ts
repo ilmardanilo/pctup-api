@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const ImageSchema = new mongoose.Schema(
+export const ImageSchema = new mongoose.Schema(
   {
     publicId: {
       type: String,
