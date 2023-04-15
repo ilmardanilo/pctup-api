@@ -30,6 +30,35 @@ export class SetupRepository implements ISetupRepository {
     });
   }
 
+  async getSetupsActivesAndPublics(): Promise<ISetup[]> {
+    const setups = await this.setupCollection.aggregate([
+      {
+        $match: {
+          estaAtivo: true,
+          estaPublico: true,
+        },
+      },
+      {
+        $lookup: {
+          from: 'usuario',
+          localField: 'usuarioId',
+          foreignField: '_id',
+          as: 'usuario',
+        },
+      },
+      {
+        $unwind: '$usuario',
+      },
+      {
+        $project: {
+          'usuario.senha': 0,
+        },
+      },
+    ]);
+
+    return setups && setups.map((setup) => setupToDomain(setup));
+  }
+
   async getSetupById(setupId: string): Promise<ISetup | null> {
     const setup = (await this.setupCollection
       .findOne({ _id: new Types.ObjectId(setupId) })
@@ -70,9 +99,20 @@ export class SetupRepository implements ISetupRepository {
 }
 
 const setupToDomain = (setup: any): ISetup => {
-  return {
+  const setupFormated: ISetup = {
     ...setup,
     _id: String(setup._id),
     usuarioId: String(setup.usuarioId),
   };
+
+  const userFormated = {
+    ...setup?.usuario,
+    _id: String(setup?.usuario?._id),
+  };
+
+  if (setup.usuario) {
+    setupFormated.usuario = userFormated;
+  }
+
+  return setupFormated;
 };

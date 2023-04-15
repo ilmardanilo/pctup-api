@@ -38,10 +38,7 @@ export class SetupService implements ISetupService {
   }
 
   async getSetups(): Promise<ISetup[]> {
-    return await this.setupRepository.getSetups({
-      estaAtivo: true,
-      estaPublico: true,
-    });
+    return await this.setupRepository.getSetupsActivesAndPublics();
   }
 
   async getSetupsByUserId(userId: string): Promise<ISetup[]> {

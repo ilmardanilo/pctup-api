@@ -1,5 +1,6 @@
 import { IImage } from '../../../../helpers/utils';
 import { ObjectId } from 'mongoose';
+import { IUser } from '../../../user/entity/interfaces/user-interface';
 
 export interface ISetup {
   _id: ObjectId | string;
@@ -11,6 +12,7 @@ export interface ISetup {
   imagens?: IImage[];
   createdAt: Date;
   updatedAt?: Date;
+  usuario?: IUser;
 }
 
 export interface IParamsCreateSetup {
@@ -21,8 +23,6 @@ export interface IParamsCreateSetup {
 
 export interface IParamsGetSetups {
   usuarioId?: string;
-  estaAtivo?: boolean;
-  estaPublico?: boolean;
 }
 
 export interface IParamsUpdateSetup {
