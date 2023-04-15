@@ -200,7 +200,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/SetupResponse'
+                  $ref: '#/components/schemas/SetupResponseWithUser'
 
         default:
           description: Invalid request.
@@ -796,6 +796,31 @@ components:
           $ref: '#/components/schemas/DateTime'
         updatedAt:
           $ref: '#/components/schemas/DateTime'
+
+    SetupResponseWithUser:
+      properties:
+        _id:
+          $ref: '#/components/schemas/ObjectID'
+        usuarioId:
+          $ref: '#/components/schemas/ObjectID'
+        titulo:
+          type: string
+        descricao:
+          type: string
+        estaAtivo:
+          type: boolean
+        estaPublico:
+          type: boolean
+        imagens:
+          type: array
+          items:
+            $ref: '#/components/schemas/Image'
+        createdAt:
+          $ref: '#/components/schemas/DateTime'
+        updatedAt:
+          $ref: '#/components/schemas/DateTime'
+        usuario:
+          $ref: '#/components/schemas/UserResponse'
 
     Image:
       properties:
