@@ -292,7 +292,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/SetupResponse'
+                  $ref: '#/components/schemas/SetupResponseWithUser'
 
         default:
           description: Invalid request.

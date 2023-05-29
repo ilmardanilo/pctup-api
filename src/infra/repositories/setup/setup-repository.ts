@@ -20,10 +20,30 @@ export class SetupRepository implements ISetupRepository {
     return setupToDomain(setup);
   }
 
-  async getSetups(params: IParamsGetSetups): Promise<ISetup[]> {
-    const setups = (await this.setupCollection
-      .find(params)
-      .lean()) as unknown as ISetup[];
+  async getSetups({ usuarioId }: IParamsGetSetups): Promise<ISetup[]> {
+    const setups = await this.setupCollection.aggregate([
+      {
+        $match: {
+          usuarioId: new Types.ObjectId(usuarioId),
+        },
+      },
+      {
+        $lookup: {
+          from: 'usuario',
+          localField: 'usuarioId',
+          foreignField: '_id',
+          as: 'usuario',
+        },
+      },
+      {
+        $unwind: '$usuario',
+      },
+      {
+        $project: {
+          'usuario.senha': 0,
+        },
+      },
+    ]);
 
     return setups.map((setup) => {
       return setupToDomain(setup);

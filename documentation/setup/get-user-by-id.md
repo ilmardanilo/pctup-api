@@ -16,7 +16,7 @@
 2. ✅ **Busca** o usuário com o id fornecido
 3. ✅ **Verifica** se o usuário com o id fornecido existe
 4. ✅ **Busca** os setups referentes ao usuário com o id fornecido
-5. ✅ Retorna **200** com os setups do usuário
+5. ✅ Retorna **200** com os setups do usuário e suas informações
 
 > ## Exceções
 
