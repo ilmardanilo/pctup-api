@@ -74,7 +74,7 @@ export class UserAccountService implements IUserAccountService {
   }
 
   private _generateToken(id: string): string {
-    const token = sign({ id }, PRIVATE_KEY, { expiresIn: '1h' });
+    const token = sign({ id }, PRIVATE_KEY, { expiresIn: '7 days' });
     return token;
   }
 }
