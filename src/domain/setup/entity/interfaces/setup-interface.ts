@@ -25,13 +25,6 @@ export interface IParamsGetSetups {
   usuarioId?: string;
 }
 
-export interface IParamsUpdateSetup {
-  titulo?: string;
-  descricao?: string;
-  estaPublico?: boolean;
-  imagens?: IImage[];
-}
-
 export interface IParamsAddImage {
   setupId: string;
   file: {

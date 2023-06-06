@@ -1,9 +1,4 @@
-import {
-  ISetup,
-  IParamsCreateSetup,
-  IParamsUpdateSetup,
-  IParamsAddImage,
-} from './setup-interface';
+import { ISetup, IParamsCreateSetup, IParamsAddImage } from './setup-interface';
 import { IImage } from '../../../../helpers/utils';
 
 export interface ISetupService {
@@ -11,7 +6,7 @@ export interface ISetupService {
   getSetups(): Promise<ISetup[]>;
   getSetupsByUserId(userId: string): Promise<ISetup[]>;
   deleteSetup(setupId: string): Promise<void>;
-  updateSetupById(setupId: string, params: IParamsUpdateSetup): Promise<void>;
+  updateSetupById(setupId: string, params: Partial<ISetup>): Promise<void>;
   addImage(params: IParamsAddImage): Promise<IImage>;
   removeImage(setupId: string, publicId: string): Promise<void>;
 }

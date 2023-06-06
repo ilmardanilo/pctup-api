@@ -3,7 +3,6 @@ import {
   ISetup,
   IParamsCreateSetup,
   IParamsGetSetups,
-  IParamsUpdateSetup,
 } from '../../../domain/setup/entity/interfaces/setup-interface';
 import { ISetupRepository } from '../../../domain/setup/repository/setup-repository-interface';
 import { Types } from 'mongoose';
@@ -93,7 +92,7 @@ export class SetupRepository implements ISetupRepository {
 
   async updateSetupById(
     setupId: string,
-    params: IParamsUpdateSetup,
+    params: Partial<ISetup>,
   ): Promise<void> {
     await this.setupCollection.updateOne(
       { _id: new Types.ObjectId(setupId) },

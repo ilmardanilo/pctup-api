@@ -2,7 +2,7 @@ import { ISetupService } from '../../domain/setup/entity/interfaces/setup-servic
 import { handleError } from '../../helpers/utils';
 import {
   IParamsCreateSetup,
-  IParamsUpdateSetup,
+  ISetup,
 } from '../../domain/setup/entity/interfaces/setup-interface';
 
 import { Request, Response } from 'express';
@@ -66,7 +66,7 @@ export class SetupController {
   };
 
   updateSetup = async (
-    req: Request<{ setupId: string }, {}, IParamsUpdateSetup, {}>,
+    req: Request<{ setupId: string }, {}, Partial<ISetup>, {}>,
     res: Response,
   ) => {
     try {

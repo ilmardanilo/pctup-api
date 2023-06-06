@@ -7,7 +7,6 @@ import {
 import {
   IParamsAddImage,
   IParamsCreateSetup,
-  IParamsUpdateSetup,
   ISetup,
 } from '../entity/interfaces/setup-interface';
 import { IUserRepository } from '../../user/repository/user-repository-interface';
@@ -62,7 +61,7 @@ export class SetupService implements ISetupService {
 
   async updateSetupById(
     setupId: string,
-    params: IParamsUpdateSetup,
+    params: Partial<ISetup>,
   ): Promise<void> {
     if (!Object.keys(params).length) {
       throw new UnprocessableEntityError(
@@ -76,7 +75,10 @@ export class SetupService implements ISetupService {
       throw new NotFoundError('Setup não encontrado.');
     }
 
-    await this.setupRepository.updateSetupById(setupId, params);
+    await this.setupRepository.updateSetupById(setupId, {
+      ...params,
+      estaAtivo: false,
+    });
   }
 
   async removeImage(setupId: string, publicId: string): Promise<void> {
@@ -131,6 +133,7 @@ export class SetupService implements ISetupService {
       await this.setupRepository.addImage(setupId, image);
 
       return image;
+      // eslint-disable-next-line no-useless-catch
     } catch (error) {
       throw error;
     } finally {
