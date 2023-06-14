@@ -908,4 +908,4 @@ components:
         createdAt:
           $ref: '#/components/schemas/DateTime'
         setup:
-          $ref: '#/components/schemas/SetupResponse'
+          $ref: '#/components/schemas/SetupResponseWithUser'

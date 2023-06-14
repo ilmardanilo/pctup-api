@@ -48,6 +48,22 @@ export class FavoriteRepository implements IFavoriteRepository {
       {
         $unwind: '$setup',
       },
+      {
+        $lookup: {
+          from: 'usuario',
+          localField: 'setup.usuarioId',
+          foreignField: '_id',
+          as: 'usuario',
+        },
+      },
+      {
+        $unwind: '$usuario',
+      },
+      {
+        $project: {
+          'usuario.senha': 0,
+        },
+      },
     ]);
 
     return favorites && favorites.map((favorite) => favoriteToDomain(favorite));
@@ -55,7 +71,7 @@ export class FavoriteRepository implements IFavoriteRepository {
 }
 
 const favoriteToDomain = (favorite: any): IFavorite => {
-  return {
+  const favoriteToDomain = {
     ...favorite,
     _id: favorite._id.toString(),
     usuarioId: favorite.usuarioId.toString(),
@@ -64,6 +80,14 @@ const favoriteToDomain = (favorite: any): IFavorite => {
       ...favorite?.setup,
       _id: favorite?.setup?._id.toString(),
       usuarioId: favorite?.setup?.usuarioId.toString(),
+      usuario: {
+        ...favorite?.usuario,
+        _id: favorite?.usuario?._id.toString(),
+      },
     },
   };
+
+  delete favoriteToDomain.usuario;
+
+  return favoriteToDomain;
 };
