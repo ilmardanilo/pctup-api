@@ -1,4 +1,5 @@
 import { ObjectId } from 'mongoose';
+import { IUser } from '../../../user/entity/interfaces/user-interface';
 
 export interface IComment {
   _id: ObjectId | string;
@@ -7,6 +8,7 @@ export interface IComment {
   descricao: string;
   createdAt: Date;
   updatedAt?: Date;
+  usuario?: IUser;
 }
 
 export interface IParamsCreateComment {

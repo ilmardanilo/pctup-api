@@ -865,6 +865,8 @@ components:
           $ref: '#/components/schemas/DateTime'
         updatedAt:
           $ref: '#/components/schemas/DateTime'
+        usuario:
+          $ref: '#/components/schemas/UserResponse'
 
     AddLike:
       properties:

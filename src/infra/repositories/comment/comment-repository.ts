@@ -48,9 +48,36 @@ export class CommentRepository implements ICommentRepository {
   }
 
   async getCommentsBySetupId(setupId: string): Promise<IComment[]> {
-    const comments = (await this.commentCollection
-      .find({ setupId: new Types.ObjectId(setupId) })
-      .lean()) as unknown as IComment[];
+    const comments = await this.commentCollection.aggregate([
+      {
+        $match: {
+          setupId: new Types.ObjectId(setupId),
+        },
+      },
+      {
+        $lookup: {
+          from: 'usuario',
+          localField: 'usuarioId',
+          foreignField: '_id',
+          as: 'usuario',
+        },
+      },
+      {
+        $unwind: {
+          path: '$usuario',
+        },
+      },
+      {
+        $project: {
+          'usuario.senha': 0,
+        },
+      },
+      {
+        $sort: {
+          createdAt: -1,
+        },
+      },
+    ]);
 
     return comments.map((comment) => {
       return toCommentDomain(comment);
@@ -64,5 +91,9 @@ const toCommentDomain = (comment: any): IComment => {
     _id: String(comment._id),
     usuarioId: String(comment.usuarioId),
     setupId: String(comment.setupId),
+    usuario: {
+      ...comment.usuario,
+      _id: String(comment.usuario?._id),
+    },
   };
 };
