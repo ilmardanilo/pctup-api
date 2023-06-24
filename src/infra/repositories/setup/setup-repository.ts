@@ -42,6 +42,11 @@ export class SetupRepository implements ISetupRepository {
           'usuario.senha': 0,
         },
       },
+      {
+        $sort: {
+          createdAt: -1,
+        },
+      },
     ]);
 
     return setups.map((setup) => {
@@ -71,6 +76,11 @@ export class SetupRepository implements ISetupRepository {
       {
         $project: {
           'usuario.senha': 0,
+        },
+      },
+      {
+        $sort: {
+          createdAt: -1,
         },
       },
     ]);
