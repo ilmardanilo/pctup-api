@@ -74,6 +74,11 @@ export class FavoriteRepository implements IFavoriteRepository {
           usuario: 0,
         },
       },
+      {
+        $sort: {
+          createdAt: -1,
+        },
+      },
     ]);
 
     return favorites && favorites.map((favorite) => favoriteToDomain(favorite));
