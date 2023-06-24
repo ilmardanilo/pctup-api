@@ -57,6 +57,12 @@ export class SetupService implements ISetupService {
     }
 
     await this.setupRepository.deleteSetup(setupId);
+
+    if (setup.imagens?.length) {
+      for (const image of setup.imagens) {
+        await this.cloudinaryService.delete(image.publicId);
+      }
+    }
   }
 
   async updateSetupById(
