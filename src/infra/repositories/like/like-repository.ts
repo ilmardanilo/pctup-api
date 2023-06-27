@@ -39,6 +39,12 @@ export class LikeRepository implements ILikeRepository {
       _id: new Types.ObjectId(likeId),
     });
   }
+
+  async countLikes(setupId: string): Promise<number> {
+    return await this.likeCollection.count({
+      setupId: new Types.ObjectId(setupId),
+    });
+  }
 }
 
 const likeToDomain = (like: any): ILike => {
