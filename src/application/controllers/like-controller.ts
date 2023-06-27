@@ -51,4 +51,19 @@ export class LikeController {
       handleError(res, error);
     }
   };
+
+  countLikes = async (
+    req: Request<{}, {}, {}, { setupId: string }>,
+    res: Response,
+  ) => {
+    try {
+      const { setupId } = req.query;
+
+      const count = await this.likeService.countLikes(setupId);
+
+      res.status(200).json({ count });
+    } catch (error) {
+      handleError(res, error);
+    }
+  };
 }
