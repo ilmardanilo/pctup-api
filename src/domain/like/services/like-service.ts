@@ -59,4 +59,14 @@ export class LikeService implements ILikeService {
 
     return await this.likeRepository.getLikesByUserId(userId);
   }
+
+  async countLikes(setupId: string): Promise<number> {
+    const setup = await this.setupRepository.getSetupById(setupId);
+
+    if (!setup) {
+      throw new NotFoundError('Setup não encontrado.');
+    }
+
+    return await this.likeRepository.countLikes(setupId);
+  }
 }

@@ -4,4 +4,5 @@ export interface ILikeService {
   addLike(params: IParamsCreateLike): Promise<ILike>;
   removeLike(likeId: string): Promise<void>;
   getLikesByUserId(userId: string): Promise<ILike[]>;
+  countLikes(setupId: string): Promise<number>;
 }
