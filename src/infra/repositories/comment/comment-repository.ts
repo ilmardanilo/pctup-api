@@ -86,14 +86,21 @@ export class CommentRepository implements ICommentRepository {
 }
 
 const toCommentDomain = (comment: any): IComment => {
-  return {
+  const commentFormated: IComment = {
     ...comment,
     _id: String(comment._id),
     usuarioId: String(comment.usuarioId),
     setupId: String(comment.setupId),
-    usuario: {
-      ...comment.usuario,
-      _id: String(comment.usuario?._id),
-    },
   };
+
+  const userFormated = {
+    ...comment.usuario,
+    _id: String(comment.usuario?._id),
+  };
+
+  if (comment.usuario) {
+    commentFormated.usuario = userFormated;
+  }
+
+  return commentFormated;
 };
