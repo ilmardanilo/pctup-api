@@ -6,10 +6,6 @@
 
 - setupId
 
-> ### Headers
-
-- Authorization
-
 > ## Caso de sucesso
 
 1. ✅ Recebe uma requisição do tipo **GET** na rota **/api/v1/comments/setups/{setupId}**

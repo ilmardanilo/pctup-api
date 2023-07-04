@@ -8,6 +8,6 @@ const commentRouter = Router();
 commentRouter.post('/comments', auth, commentController.createComment);
 commentRouter.put('/comments/:commentId', auth, commentController.updateComment);
 commentRouter.delete('/comments/:commentId', auth, commentController.deleteComment);
-commentRouter.get('/comments/setups/:setupId', auth, commentController.getCommentsBySetupId);
+commentRouter.get('/comments/setups/:setupId', commentController.getCommentsBySetupId);
 
 export { commentRouter };
