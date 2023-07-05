@@ -35,6 +35,21 @@ export class SetupController {
     }
   };
 
+  getSetup = async (
+    req: Request<{ setupId: string }, {}, {}, {}>,
+    res: Response,
+  ) => {
+    try {
+      const { setupId } = req.params;
+
+      const setup = await this.setupService.getSetup(setupId);
+
+      res.status(200).json(setup);
+    } catch (error) {
+      handleError(res, error);
+    }
+  };
+
   deleteSetup = async (
     req: Request<{ setupId: string }, {}, {}, {}>,
     res: Response,

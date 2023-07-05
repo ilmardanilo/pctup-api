@@ -4,6 +4,7 @@ import { IImage } from '../../../../helpers/utils';
 export interface ISetupService {
   createSetup(params: IParamsCreateSetup): Promise<ISetup>;
   getSetups(): Promise<ISetup[]>;
+  getSetup(setupId: string): Promise<ISetup>;
   getSetupsByUserId(userId: string): Promise<ISetup[]>;
   deleteSetup(setupId: string): Promise<void>;
   updateSetupById(setupId: string, params: Partial<ISetup>): Promise<void>;

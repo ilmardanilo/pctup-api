@@ -7,6 +7,7 @@ const setupRouter = Router();
 
 setupRouter.post('/setups', auth, setupController.createSetup);
 setupRouter.get('/setups', setupController.getSetups);
+setupRouter.get('/setups/:setupId', auth, setupController.getSetup);
 setupRouter.delete('/setups/:setupId', auth, setupController.deleteSetup);
 setupRouter.put('/setups/:setupId', auth, setupController.updateSetup);
 setupRouter.get('/setups/users/:userId', auth, setupController.getSetupsByUserId);
