@@ -210,6 +210,35 @@ paths:
                 $ref: '#/components/schemas/Error'
 
   /setups/{setupId}:
+    get:
+      tags:
+        - Setup
+      description: >-
+        Busca setup por id.
+
+      parameters:
+        - name: setupId
+          in: path
+          description: >-
+            ObjectId do setup.
+          required: true
+          schema:
+            $ref: '#/components/schemas/ObjectID'
+
+      responses:
+        '200':
+          description: 'Successful request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetupResponse'
+
+        default:
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
     delete:
       tags:
         - Setup
