@@ -23,7 +23,7 @@ export const handleError = (res: Response, error: any) => {
 };
 
 export const hasTypeImageAllowed = (mimeType: string): boolean => {
-  const allowedImageTypes = ['png', 'jpg', 'jpeg'];
+  const allowedImageTypes = ['png', 'jpg', 'jpeg', 'webp'];
 
   const typeImage = mimeType.split('/')[1];
 
