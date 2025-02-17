@@ -4,7 +4,7 @@
 
 ## 📝 Funcionalidades  
 
-- **Gerenciamento de usuários**: Cadastro, login e autenticação com JWT.  
+- **Gerenciamento de usuários**: Cadastro, edição, login e autenticação com JWT.  
 - **Interação com setups**: Curtir, comentar, avaliar e marcar como favorito setups.  
 - **Análise de setups**: Administração de setups enviados pelos usuários antes de publicação.  
 - **Upload de imagens**: Gerenciamento de imagens utilizando Cloudinary.  
