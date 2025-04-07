@@ -1,4 +1,4 @@
-# 🚀 Backend do PCtup  
+# 🚀 Backend do projeto PCtup  
 
 **PCtup** é uma rede social para entusiastas de setups! 🎮💻 Aqui, você encontra o código que alimenta o backend do projeto, desenvolvido com **Node.js** e **TypeScript**, seguindo boas práticas de desenvolvimento.  
 
