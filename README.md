@@ -15,7 +15,7 @@
 ## ⚙️ Tecnologias Utilizadas  
 
 - **Node.js** + **Express**  
-- **TypeScript**  
+- **Typescript**  
 - **MongoDB**  
 - **Swagger**  
 - **Cloudinary**  
